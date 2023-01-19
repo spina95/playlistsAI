@@ -1,6 +1,7 @@
-FROM python:3.8
+FROM python:3.6
 ENV PYTHONUNBUFFERED 1
-WORKDIR /app
-COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt
-COPY . /app
+RUN mkdir /be
+WORKDIR /be
+ADD requirements.txt /be/
+RUN pip install --upgrade pip && pip install -r requirements.txt
+ADD . /be/
