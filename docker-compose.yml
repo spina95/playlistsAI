@@ -2,6 +2,7 @@ version: '3'
 services:
   db:
     image: mysql:latest
+    container_name: db
     ports:
       - "3306:3306"
     volumes:
@@ -12,12 +13,28 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: test_pass
       MYSQL_ROOT_HOST: '%' 
-  web:
-    build: .
+
+  be:
+    build: ./be
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./be:/be
+    container_name: be
     ports:
       - "8000:8000"
     depends_on:
       - db
+
+  fe:
+    container_name: fe
+    restart: always
+    ports:
+      - 8080:8080
+    build:
+      context: ./fe
+      dockerfile: Dockerfile
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./fe:/app
+      - /app/node_modules   
