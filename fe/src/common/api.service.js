@@ -5,6 +5,9 @@ import { API_URL } from "@/common/config";
 const ApiService = {
   init() {
     axios.defaults.baseURL = API_URL;
+    axios.defaults.headers = {
+      'Content-Type': 'application/json',
+    }
   },
 
   setHeader() {
@@ -14,7 +17,7 @@ const ApiService = {
   },
 
   query(resource, params) {
-    return axios.get(resource, params).catch(error => {
+    return axios.get(resource, {params: params}).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },
@@ -45,10 +48,3 @@ const ApiService = {
 };
 
 export default ApiService;
-
-export const TagsService = {
-    get() {
-      console.log(">>>>>>>>>>>>>")
-      return ApiService.get("/playlistsai/playlists");
-    }
-  };
