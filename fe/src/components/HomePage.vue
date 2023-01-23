@@ -31,7 +31,11 @@
   }
   .subtitle {
     font-size: 60px;
-    text-align: center;
+    text-align: start;
+    width: 25%;
+  }
+  .v-icon {
+    width: 8%;
   }
   .gradient {
     background: linear-gradient(.25turn, #01C780, 50%, #01A3C7);;
