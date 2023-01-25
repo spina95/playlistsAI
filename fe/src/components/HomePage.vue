@@ -5,61 +5,64 @@
         <h1 class="title gradient display-2 font-weight-bold mb-3">
           PlaylistsAI
         </h1>
-        <v-row align="center" justify="center">
-            <v-icon size="65" class="gradient">mdi-chat</v-icon>        
-            <h2 class="subtitle gradient font-weight-bold">Ask</h2>
-            <v-spacer/>
-            <v-icon size="65" class="gradient">mdi-earth</v-icon>        
-            <h2 class="subtitle gradient font-weight-bold">Explore</h2>
-            <v-spacer/>
-            <v-icon size="65" class="gradient">mdi-music-note</v-icon>        
-            <h2 class="subtitle gradient font-weight-bold">Listen</h2>
+        <v-row>
+          <IconTitle icon="mdi-chat" text="Ask" justify="center" />
+          <IconTitle icon="mdi-earth" text="Explore" justify="center" />
+          <IconTitle icon="mdi-headphones" text="Listen" justify="center" />
         </v-row>
-        <SearchBar/>
+        <div style="height: 50px;"/>
+        <h2>Try some examples:</h2>
+        <div v-for="example in examples" :key="example">
+          <h3 class="example" @click="search_example(example)">"{{ example }}"</h3>
+        </div>
+        <SearchBar :search-text="searchText"/>
       </v-col>
-      
     </v-row>
   </v-container>
 </template>
 
 <style scoped>
-  .example {
-    color: red;
-  }
   .title {
     font-size: 120px;
   }
-  .subtitle {
-    font-size: 60px;
-    text-align: start;
-    width: 25%;
+
+  .example {
+    cursor: pointer;
+    color: darkgrey;
   }
-  .v-icon {
-    width: 8%;
-  }
-  .gradient {
-    background: linear-gradient(.25turn, #01C780, 50%, #01A3C7);;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+
+  .example:hover {
+    color: white;
   }
 </style>
 
 <script>
 
 import SearchBar from "./SearchBar.vue"
-import { mdiChat } from '@mdi/js';
+import IconTitle from "./IconTitle.vue"
 
 export default {
   name: 'HomePage',
 
   components: {
     SearchBar,
+    IconTitle
   },
 
   data: () => ({
-    icons: {
-      mdiChat
-    },
+    examples: [
+      "Suggest me 10 soundtracks from the movies of Steven Spielberg released before 2005",
+      "Suggest me 15 songs from the anime of Naruto or One Piece",
+      "Suggest me some chill piano pieces to listen while studying"
+    ],
+    searchText: ""
   }),
+
+  methods: {
+    search_example(example){
+      console.log(example)
+      this.searchText = example
+    }
+  }
 }
 </script>

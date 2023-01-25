@@ -1,26 +1,34 @@
 <template>
-   <input type="text" v-model="this.input" v-on:keyup.enter="filteredList" placeholder="Search songs..." class="text-field-style" />
-   <div v-for="track in response" :key="track">
-    <v-row class="item track"  align="center">
-      <img class="cover" :src="track['cover']"/>
-      <v-col align-self="start">
-        <v-row align="center" style="height: 50px">
-          <v-spacer/>
-          <v-icon size="30" style="color:darkgrey">mdi-trash-can-outline</v-icon> 
-        </v-row>
-        <h2 style="height: 50%" class="track-title">{{ track["title"] }}</h2>
-        <h3 style="height: 50%" class="track-subtitle">{{ track["artists"] }}</h3>
-        <v-row align-content="end" align="end" style="height: 90px">
-          <audio controls>
-            <source :src="track['preview_url']" type="audio/mpeg">
-            Your browser does not support the audio tag.
-            </audio>
-          <v-spacer/>
-        </v-row>
-        
-      </v-col>
+   <input type="text" v-model="this.input"  v-on:keyup.enter="filteredList" placeholder="Search songs..." class="text-field-style" />
+   <v-row dense>
+   <v-col cols="12">
+    <v-row>
+      <v-spacer/>
+      <v-btn v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = true">
+        <v-icon right dark> mdi-heart </v-icon>  
+        Save
+      </v-btn>
+      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="dialog = true">
+        <v-icon right dark> mdi-spotify </v-icon>  
+        Create playlist
+      </v-btn>
     </v-row>
-   </div>
+    <div v-for="(track, index) in response" :key="track">
+      <TrackCard :track="track" :index="index" @event="remove_track" />
+    </div>
+    <v-progress-circular 
+        indeterminate
+        color="primary"
+        size="50"
+        class="ma-5"
+        v-if="loading"
+    ></v-progress-circular>
+    <h3 v-if="!loading && !check_empty_response()" color="primary">No results were found</h3>
+  </v-col>
+  </v-row>
+  <v-dialog v-model="dialog" width="500">
+    <LoginSpotifyDialog/>
+  </v-dialog>
  </template>
 
 <style>
@@ -31,7 +39,6 @@ input {
   height: 70px;
   margin: 20px auto;
   padding: 10px 45px;
-  
   background: rgb(255, 255, 255) url("../assets/search-icon.svg") no-repeat 15px center;
   background-size: 15px 15px;
   font-size: 16px;
@@ -41,45 +48,27 @@ input {
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.no-result {
+  color: primary;
+}
+
 .text-field-style {
     background-color: rgba(240, 248, 255, 0.813);
     border-radius: 30px;
     color: black;
 }
 
-.item {
-  width: 100%;
-  height: 190px;
-  margin: 0 auto 10px auto;
-  padding: 0px 15px;
-  color: white;
-  vertical-align: middle;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+.icon-button {
+  border-radius: 20px;
+  margin: 10px 10px;
 }
 
-.track {
-  background-color: rgba(92, 92, 92, 0.379);
-  cursor: pointer;
+.save-button {
+ background-color: rgba(255, 40, 40, 0.45);
 }
 
-.cover {
-  height: 150px;
-  width: 150px;
-  border-radius: 10%;
-}
-
-.track-title {
-  color: white;
-  font-size: large;
-  text-align: start;
-}
-
-.track-subtitle {
-  color: rgb(138, 138, 138);
-  font-size: large;
-  text-align: start;
+.export-button {
+ background-color: rgba(0, 188, 72, 0.45);
 }
 
 
@@ -91,15 +80,21 @@ input {
 <script>
 import { ref } from "vue";
 import {SearchService} from "../common/api.Search"
+import TrackCard from "./TrackCard.vue"
+import LoginSpotifyDialog from "./LoginSpotifyDialog.vue";
 
 export default {
   name: 'SearchBar',
   components: {
+    TrackCard,
+    LoginSpotifyDialog,
   },
+  props: ['searchText'],
   data: function () {
     return {
+        loading: false,
         input: ref(""), 
-        fruits: ["apple", "banana", "orange"],
+        dialog: false,
         response: {
           0: {
             "title": "The Lion Sleeps Tonight",
@@ -111,7 +106,7 @@ export default {
           },
           1: {
             "title": "Imagine The Fire",
-            "artists": "Hans Zimmer",
+            "artists": "Hans Zimmer, efresfsdfsdfffffffffffffffsf fdsfsdf sdf sdf dsfdsfdsfsdfsdfsdf sdasd",
             "text": " The Dark Knight (Original Motion Picture Soundtrack)\n",
             "cover": "https://i.scdn.co/image/ab67616d0000b27327d19a726d55dff73b119c78",
             "spotify_uri": "spotify:track:0umlh8c6f97cLxW6KxSHlV",
@@ -130,10 +125,32 @@ export default {
   },
   methods: {
     async filteredList() {
+      this.loading = true
+      this.response = {}
       const data = await SearchService.query(this.input)
       this.response = data.data.data
-      print(this.response)
-    }
-  }
+      this.loading = false
+    },
+
+    remove_track(index) {
+      delete this.response[index]
+    },
+
+    check_empty_response() {
+      return Object.keys(this.response).length > 0
+    }, 
+  },
+
+  watch: { 
+    async searchText() {
+      this.loading = true
+      this.input = this.searchText
+      this.response = {}
+      const data = await SearchService.query(this.searchText)
+      this.response = data.data.data
+      this.loading = false
+    },
+
+}
 }
 </script>
