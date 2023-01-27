@@ -1,6 +1,6 @@
 <template>
   <v-container style="width: 70%">
-    Authenticating...
+    <h2>Authenticating...</h2>
   </v-container>
 </template>
 

@@ -31,18 +31,21 @@ class SearchView(APIView):
             result = sp.search(q='track:' + x, type='track', limit=1)
             if result:
                 track = result['tracks']['items'][0]
+                id = track['id']
                 cover = track['album']['images'][0]['url']
                 title = track['name']
                 spotify_uri = track['uri']
                 preview_url = track['preview_url']
                 artists = ', '.join([x['name'] for x in track['artists']])
                 out[i] = {
+                    "id": id,
                     "title": title,
                     "artists": artists,
                     "text": x,
                     "cover": cover,
                     "spotify_uri": spotify_uri,
-                    "preview_url": preview_url
+                    "preview_url": preview_url,
+                    "export": True
                 }
                 
         return Response({"status": "success", "data": out, "response": data}, status=status.HTTP_200_OK)

@@ -3,18 +3,21 @@ import router  from '@/router/index'
 
 const state = {
   token: window.localStorage.getItem('token'),
-  user: window.localStorage.getItem('user')
+  user: window.localStorage.getItem('user'),
+  playlist: window.localStorage.getItem('playlist'),
 }
 
 const getters = {
   isLoggedIn: state => !!state.token,
-  getUser: state => state.user
+  getUser: state => state.user,
+  getSpotifyToken: state => state.token
 }
 
 const actions = {
   login: () => { 
     api.login()
   },
+
   continueOAuth: async ({ commit }, location) => {
     //const code = location  //.href.match("/(?:code)\=([\S]*?)\&/")[1];
     const queryString = location.search;
@@ -32,6 +35,7 @@ const actions = {
 
     router.push('/')
   },
+
   logout: ({ commit }) => {
     commit('setToken', null)
     commit('setUser', null)

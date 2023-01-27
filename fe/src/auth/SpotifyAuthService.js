@@ -9,7 +9,8 @@ function login() {
     'client_id=' +
     spotify_config.client_id +
     '&redirect_uri=' +
-    spotify_config.redirect_uri)
+    spotify_config.redirect_uri +
+    '&scope=' + spotify_config.scope)
 }
 
 async function postGoogleCode(code) {
@@ -18,11 +19,9 @@ async function postGoogleCode(code) {
     client_id: spotify_config.client_id,
     client_secret: spotify_config.client_secret,
     grant_type: 'authorization_code',
-    redirect_uri: spotify_config.redirect_uri
+    redirect_uri: spotify_config.redirect_uri,
+    scope: spotify_config.scope
   };
-
-  // We need to decode the authorization code
-  // From, ex, this... 4%2_9Klgdf... to 4/_9Klgdf
 
   const options = {
     method: 'POST',

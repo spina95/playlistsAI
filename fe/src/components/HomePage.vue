@@ -2,8 +2,8 @@
   <v-container style="width: 70%">
     <v-row class="text-center">
       <v-col cols="12">
-        <h1 class="title gradient display-2 font-weight-bold mb-3">
-          PlaylistsAI
+        <h1 class="title gradient display-2 font-weight-bold">
+          MusicAI
         </h1>
         <v-row>
           <IconTitle icon="mdi-chat" text="Ask" justify="center" />

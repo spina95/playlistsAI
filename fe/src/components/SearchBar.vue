@@ -1,5 +1,5 @@
 <template>
-   <input type="text" v-model="this.input"  v-on:keyup.enter="filteredList" placeholder="Search songs..." class="text-field-style" />
+   <input type="text" v-model="this.input"  v-on:keyup.enter="filteredList" placeholder="Search songs..." class="text-field-style search-text-field" />
    <v-row dense>
    <v-col cols="12">
     <v-row>
@@ -8,7 +8,7 @@
         <v-icon right dark> mdi-heart </v-icon>  
         Save
       </v-btn>
-      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="dialog = true">
+      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="createPlaylist()">
         <v-icon right dark> mdi-spotify </v-icon>  
         Create playlist
       </v-btn>
@@ -33,7 +33,7 @@
 
 <style>
 
-input {
+.search-text-field {
   display: block;
   width: 100%;
   height: 70px;
@@ -82,6 +82,7 @@ import { ref } from "vue";
 import {SearchService} from "../common/api.Search"
 import TrackCard from "./TrackCard.vue"
 import LoginSpotifyDialog from "./LoginSpotifyDialog.vue";
+import { mapActions } from 'vuex'
 
 export default {
   name: 'SearchBar',
@@ -96,30 +97,36 @@ export default {
         input: ref(""), 
         dialog: false,
         response: {
-          0: {
-            "title": "The Lion Sleeps Tonight",
-            "artists": "Billy Eichner, Seth Rogen",
-            "text": " The Lion King (Original Motion Picture Soundtrack)\n",
-            "cover": "https://i.scdn.co/image/ab67616d0000b2736eb04fff9fd19fd8f65b86e1",
-            "spotify_uri": "spotify:track:67rctxgNOXUYhKiS3cv0MT",
-            "preview_url": "https://p.scdn.co/mp3-preview/d9a84dfe3f4832ad78201faf9cf49b3062808e1a?cid=3568d9f9b3544af98e31131a9fcb02dd"
-          },
-          1: {
-            "title": "Imagine The Fire",
-            "artists": "Hans Zimmer, efresfsdfsdfffffffffffffffsf fdsfsdf sdf sdf dsfdsfdsfsdfsdfsdf sdasd",
-            "text": " The Dark Knight (Original Motion Picture Soundtrack)\n",
-            "cover": "https://i.scdn.co/image/ab67616d0000b27327d19a726d55dff73b119c78",
-            "spotify_uri": "spotify:track:0umlh8c6f97cLxW6KxSHlV",
-            "preview_url": "https://p.scdn.co/mp3-preview/cbf1a6789ec0a53f38652211cae543249172e8b1?cid=3568d9f9b3544af98e31131a9fcb02dd"
-          },
-          2: {
-            "title": "The Starkiller",
-            "artists": "John Williams",
-            "text": " Star Wars: The Force Awakens (Original Motion Picture Soundtrack)\n",
-            "cover": "https://i.scdn.co/image/ab67616d0000b273e2add5f2d1440a02e4e10a75",
-            "spotify_uri": "spotify:track:7olfP2L9CUVWXfCzwJgb4Z",
-            "preview_url": "https://p.scdn.co/mp3-preview/789a0b0a071c3f57acb4e9ae3e939c0c7a6fcc87?cid=3568d9f9b3544af98e31131a9fcb02dd"
-          },
+          "1": { 
+            "id": "45SB7rSKnJ5sZgjA2vfD4H", 
+            "title": "Jurassic Park (Isla Nublar-1993)", 
+            "artists": "Hell On Mask, Tahnee Rodriguez", 
+            "text": " Jurassic Park (1993)\n", 
+            "cover": "https://i.scdn.co/image/ab67616d0000b27335d7dd872f8cd11d465cdeb7", 
+            "spotify_uri": "spotify:track:45SB7rSKnJ5sZgjA2vfD4H", 
+            "preview_url": "https://p.scdn.co/mp3-preview/21e9f5f58591f1207276ae2aa544641e6fe23e1d?cid=3568d9f9b3544af98e31131a9fcb02dd",
+            "export": true
+          }, 
+          "2": { 
+            "id": "2iuLtqeg5NN6MyYB6pRqlk", 
+            "title": "Mr. Jaws - 1975", 
+            "artists": "Dickie Goodman", 
+            "text": " Jaws (1975)\n", 
+            "cover": "https://i.scdn.co/image/ab67616d0000b273250164ecb9c19576950b5e8e", 
+            "spotify_uri": "spotify:track:2iuLtqeg5NN6MyYB6pRqlk", 
+            "preview_url": "https://p.scdn.co/mp3-preview/096c5bb9b108fa3c30581526933ca662a27abb9c?cid=3568d9f9b3544af98e31131a9fcb02dd", 
+            "export": true
+          }, 
+            "3": { 
+              "id": "2AXPdHyeJFqEh8OyR2JImr", 
+              "title": "The Visitors / Bye / End Titles: The Special Edition", 
+              "artists": "John Williams", 
+              "text": " Close Encounters of the Third Kind (1977)\n", 
+              "cover": "https://i.scdn.co/image/ab67616d0000b273416f172c9112212a39b511ed", 
+              "spotify_uri": "spotify:track:2AXPdHyeJFqEh8OyR2JImr", 
+              "preview_url": "https://p.scdn.co/mp3-preview/1a4762006b2c5095be6473ec36da32b415c97c0e?cid=3568d9f9b3544af98e31131a9fcb02dd", 
+              "export": true
+            }
         }
     }
   },
@@ -139,6 +146,13 @@ export default {
     check_empty_response() {
       return Object.keys(this.response).length > 0
     }, 
+
+    createPlaylist() {
+      this.savePlaylist(this.response)
+      this.$router.push({ name: 'create-playlist' })
+    },
+
+    ...mapActions(['savePlaylist']),
   },
 
   watch: { 
