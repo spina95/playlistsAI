@@ -17,12 +17,13 @@ jobs:
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       
     - name: docker build be
-      run: docker build ./be  -t be
+      run: docker build ./be  -t andreaspinazzola/music-ai/be:1.0.0
       
     - name: docker build fe
-      run: docker build ./be -t fe
+      run: docker build ./be -t andreaspinazzola/music-ai/fe:1.0.0
       
     - name: docker push
       run: |
-        docker push andreaspinazzola/music-ai:1.0.0
+        docker push andreaspinazzola/music-ai/be:1.0.0
+        docker push andreaspinazzola/music-ai/fe:1.0.0
       
