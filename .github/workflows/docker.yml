@@ -24,6 +24,5 @@ jobs:
       
     - name: docker push
       run: |
-        docker push be
-        docker push fe
+        andreaspinazzola/music-ai:1.0.0
       
