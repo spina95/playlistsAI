@@ -19,8 +19,11 @@ jobs:
         project_id: ${{ env.PROJECT_ID }}
         export_default_credentials: true
     
-    - name: Builod Docker Image
-      run: docker build -t $IMAGE_NAME:latest .
+    - name: docker build be
+      run: docker build ./be  -t andreaspinazzola/music-ai:1.0.0
+      
+    - name: docker build fe
+      run: docker build ./be -t andreaspinazzola/music-ai:1.0.0
       
     - name: Configure Docker client
       run: |-
