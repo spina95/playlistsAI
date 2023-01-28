@@ -7,7 +7,7 @@ jobs:
     name: Build and push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: music-ai
+      IMAGE_NAME: musicai
       PROJECT_ID: musicai-376111
     steps: 
     - name: Checkout
