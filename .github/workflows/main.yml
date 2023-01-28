@@ -20,7 +20,7 @@ jobs:
         export_default_credentials: true
     
     - name: docker build be
-      run: docker build ./be  -t $IMAGE_NAME:latest
+      run: docker build ./be -t $IMAGE_NAME:latest
       
     - name: docker build fe
       run: docker build ./be -t $IMAGE_NAME:latest
