@@ -22,9 +22,6 @@ jobs:
     - name: docker build be
       run: docker build ./be -t $IMAGE_NAME:latest --platform linux/amd64
       
-    - name: docker build fe
-      run: docker build ./be -t $IMAGE_NAME:latest --platform linux/amd64
-      
     - name: Configure Docker client
       run: |-
         gcloud auth configure-docker --quiet
