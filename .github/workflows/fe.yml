@@ -20,7 +20,7 @@ jobs:
         export_default_credentials: true
     
     - name: docker build fe
-      run: docker build ./fe --build-arg BE_URL=https://musicai-cljva746eq-oc.a.run.app -f ./fe/Dockerfile-prod -t $IMAGE_NAME:latest --platform linux/amd64
+      run: docker build ./fe --build-arg BE_URL=https://musicai-cljva746eq-oc.a.run.app -f ./fe/Dockerfile.prod -t $IMAGE_NAME:latest --platform linux/amd64
       
     - name: Configure Docker client
       run: |-
