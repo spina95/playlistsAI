@@ -1,10 +1,9 @@
 import axios from 'axios';
 import JwtService from "@/common/jwt.service";
-import { API_URL } from "@/common/config";
 
 const ApiService = {
   init() {
-    axios.defaults.baseURL = API_URL;
+    axios.defaults.baseURL = process.env.BE_URL;
     axios.defaults.headers = {
       'Content-Type': 'application/json',
     }
