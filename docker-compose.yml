@@ -16,7 +16,10 @@ services:
 
   be:
     container_name: be
-    build: ./be
+    build: 
+      context: ./be
+      args:
+          - VUE_APP_BE_URL=https://musicai-cljva746eq-oc.a.run.app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./be:/app

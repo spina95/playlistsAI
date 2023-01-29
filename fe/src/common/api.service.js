@@ -3,7 +3,7 @@ import JwtService from "@/common/jwt.service";
 
 const ApiService = {
   init() {
-    axios.defaults.baseURL = process.env.BE_URL;
+    axios.defaults.baseURL = "https://musicai-cljva746eq-oc.a.run.app";
     axios.defaults.headers = {
       'Content-Type': 'application/json',
     }
