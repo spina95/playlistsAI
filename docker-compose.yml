@@ -15,11 +15,11 @@ services:
       MYSQL_ROOT_HOST: '%' 
 
   be:
+    container_name: be
     build: ./be
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./be:/be
-    container_name: be
+      - ./be:/app
     ports:
       - "8000:8000"
     depends_on:
