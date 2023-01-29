@@ -5,3 +5,4 @@ WORKDIR /be
 ADD requirements.txt /be/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 ADD . /be/
+CMD python manage.py runserver 0.0.0.0:80
