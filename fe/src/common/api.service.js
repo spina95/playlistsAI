@@ -3,7 +3,7 @@ import JwtService from "@/common/jwt.service";
 
 const ApiService = {
   init() {
-    axios.defaults.baseURL = process.env.VUE_APP_BE_URL;
+    axios.defaults.baseURL = process.env.VUE_APP_ROOT_API;
     axios.defaults.headers = {
       'Content-Type': 'application/json',
     }
