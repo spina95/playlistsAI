@@ -1,7 +1,7 @@
 name: Build and push FE to Google Cloud Platform
 on: 
   push:
-    branches: [ master ]
+    branches: [ feature/users ]
 jobs: 
   build-push-gcr:
     name: Build and push to GCP
