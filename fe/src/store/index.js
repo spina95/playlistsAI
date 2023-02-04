@@ -1,10 +1,12 @@
 import { createStore } from 'vuex'
-import authorization from './modules/authorization'
+import spotifyAuthorization from './modules/spotifyAuthorization'
 import playlists from './modules/playlists'
+import authorization from './modules/authorization'
 
 export const store = createStore({
     modules: {
-        authorization,
-        playlists
+        spotifyAuthorization,
+        playlists,
+        authorization
       }
   })
