@@ -6,25 +6,25 @@
         </h1>
       </router-link>
       <v-spacer></v-spacer>
-      <v-btn v-if="!isLoggedIn" v-on:click="login" class="export-button icon-button">
+      <v-btn v-if="!isSpotifyLoggedIn" v-on:click="spotifyLogin" class="export-button icon-button">
         <v-icon right dark > mdi-spotify </v-icon>  
         Connect
       </v-btn>
 
-      <v-menu  v-if="isLoggedIn">
+      <v-menu  v-if="isSpotifyLoggedIn">
         <template v-slot:activator="{ props }">
           <v-btn
             v-bind="props"
             class="export-button icon-button"
           >
           <v-icon right dark > mdi-spotify </v-icon>  
-          {{ getUser }}
+            {{ getSpotifyUser }}
           </v-btn>
         </template>
         <v-list>
           <v-list-item>
             <v-list-item-title>
-              <v-btn v-on:click="logout">
+              <v-btn v-on:click="spotifyLogout">
                 Disconnect
               </v-btn>
             </v-list-item-title>
@@ -32,20 +32,25 @@
         </v-list>
       </v-menu>
       
-      <v-btn
-        flat
-        href=""
-        target="_blank"
-      >
-        <span class="mr-2">Login</span>
+      <v-btn v-if="!isAuthLoggedIn" flat target="_blank">
+        <span class="mr-2" v-on:click="login">Login</span>
       </v-btn>
-      <v-btn
-        flat
-        href=""
-        target="_blank"
-      >
-        <span class="mr-2">Signup</span>
-      </v-btn>
+      <v-menu  v-if="isAuthLoggedIn">
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props">
+            {{ getAuthUser }}
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+              <v-btn v-on:click="authLogout">
+                Disconnect
+              </v-btn>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 </template>
 
@@ -61,16 +66,21 @@
   export default {
     name: 'ToolBar',
     components: {
-      
+    
     },
     data: () => ({
 
     }),
     methods: {
-      ...mapActions(['login', 'logout'])
+      ...mapActions(['spotifyLogin', 'spotifyLogout', 'continueAuth', 'authLogout']),
+
+      login() {
+        this.$router.push({ name: 'login' })
+      },
+
     },
     computed: {
-        ...mapGetters(['isLoggedIn', 'getUser'])
+        ...mapGetters(['isSpotifyLoggedIn', 'getSpotifyUser', 'getAuthUser', 'isAuthLoggedIn'])
     }
 }
 </script>

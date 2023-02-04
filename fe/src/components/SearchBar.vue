@@ -13,6 +13,11 @@
         Create playlist
       </v-btn>
     </v-row>
+    <div style="height: 50px;">
+      <AdSense slotter="7473354236" timeout=200 classNames="ad-noborder"></AdSense>
+    </div>
+    
+
     <div v-for="(track, index) in response" :key="track">
       <TrackCard :track="track" :index="index" @event="remove_track" />
     </div>
@@ -83,12 +88,14 @@ import {SearchService} from "../common/api.Search"
 import TrackCard from "./TrackCard.vue"
 import LoginSpotifyDialog from "./LoginSpotifyDialog.vue";
 import { mapActions } from 'vuex'
+import AdSense from "./AdSense.vue";
 
 export default {
   name: 'SearchBar',
   components: {
     TrackCard,
     LoginSpotifyDialog,
+    AdSense
   },
   props: ['searchText'],
   data: function () {
