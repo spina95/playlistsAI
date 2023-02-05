@@ -89,14 +89,14 @@ WSGI_APPLICATION = 'be.wsgi.application'
 
 DATABASES = {
     
-    #'default': {
-    #    'ENGINE': 'django.db.backends.mysql',
-    #    'NAME': os.environ.get('MYSQL_DATABASE', 'playlistAI'),
-    #    'USER': os.environ.get('MYSQL_USER', 'test'),
-    #    'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'test_pass'),
-    #    'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
-    #    'PORT': os.environ.get('MYSQL_DATABASE_PORT', 3306),
-    #}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQL_DATABASE', 'playlistAI'),
+        'USER': os.environ.get('MYSQL_USER', 'test'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'test_pass'),
+        'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
+        'PORT': os.environ.get('MYSQL_DATABASE_PORT', 3306),
+    }
 }
 
 # Password validation

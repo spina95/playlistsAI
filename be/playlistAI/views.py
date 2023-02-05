@@ -9,6 +9,9 @@ import openai
 import re
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from rest_framework import status, viewsets
+from playlistAI.models import Menu, Playlist, Track
+from playlistAI.serializers import MenuSerializer, TrackSerializer, PlaylistSerializer
 
 class SearchView(APIView):  
     serializer_class = MenuSerializer
@@ -49,3 +52,11 @@ class SearchView(APIView):
                 }
                 
         return Response({"status": "success", "data": out, "response": data}, status=status.HTTP_200_OK)
+
+class PlaylistView(viewsets.ModelViewSet):  
+    queryset = Playlist.objects.all()
+    serializer_class = PlaylistSerializer
+
+class TrackView(viewsets.ModelViewSet):  
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
