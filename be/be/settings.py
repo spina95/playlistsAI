@@ -150,6 +150,18 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
 
 # Rest auth settings
 

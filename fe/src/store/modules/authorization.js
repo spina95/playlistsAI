@@ -34,6 +34,20 @@ const actions = {
     router.push('/');
   },
 
+  continueGoogleOAuth: async ({ commit }, location) => {
+    const queryString = location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code')
+    const state = urlParams.get('state')
+
+    const res = await SearchService.loginGoogle(code, state)
+    const token = res.data.access_token
+    commit('setSpotifyToken', token)
+    window.localStorage.setItem('spotifyToken', token)
+
+    router.push('/')
+  },
+
   authLogout: async ({ commit }) => {
     await SearchService.logout()
     commit('setAuthToken', null)

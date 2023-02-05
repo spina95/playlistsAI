@@ -5,6 +5,10 @@ export const SearchService = {
       return ApiService.post("/auth/auth/login/", {"email": email, "password": password});
     },
 
+    loginGoogle(code, state) {
+      return ApiService.post("/auth/api/auth/social/google/login/", {"code": code, "state": state});
+    },
+
     logout() {
       return ApiService.post("/auth/auth/logout/");
     },
