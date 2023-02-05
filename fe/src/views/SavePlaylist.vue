@@ -1,28 +1,16 @@
 <template>
     <v-container style="width: 70%">
       <v-col>
-        <v-row>
-          <v-col style="width: 40%;">
-              <DropFile/>
-          </v-col>
-          <v-col>
+          <v-col style="text-align: center;">
+            <h3>
+              {{ this.getQuery }}
+            </h3>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-text-field
                 v-model="title"
                 :counter="100"
                 label="Playlist title"
                 required
-                filled 
-                rounded 
-                dense 
-                single-line 
-                class="input-text"
-              ></v-text-field>
-          
-              <v-text-field
-                v-model="description"
-                :counter="200"
-                label="Description"
                 filled 
                 rounded 
                 dense 
@@ -37,7 +25,6 @@
 
             </v-form>
           </v-col>
-        </v-row>
       </v-col>
       <v-table class="table-songs ma-5">
         <thead>
@@ -99,14 +86,13 @@
   
 <script>
   import { mapGetters } from 'vuex'
-  import { SpotifyService } from '@/common/api.Spotify';
-  import DropFile from '@/components/DropFile.vue';
+  import { SearchService } from '@/common/api.Search';
 
   export default {
     name: 'SavePlaylist',
     props: [],
     components: {
-      DropFile
+      
     },
   
     data: () => ({
@@ -127,7 +113,21 @@
   
     methods: {
       createPlaylist() {
-        SpotifyService.createPlaylist(this.title, this.description, this.playlist)
+        let tracks = []
+        for (let i in this.playlist) {
+
+          const track = { 'spotify_id': this.playlist[i].id }
+          tracks.push(track)
+        }
+
+        const data = {
+          'tracks': tracks,
+          'title': this.title,
+          'query': this.getQuery,
+          'user': 1
+        }
+        SearchService.savePlaylist(data)
+        this.$router.push({ name: 'home' })
       }
     },
 
@@ -136,7 +136,7 @@
     },
 
     computed: {
-        ...mapGetters(['getPlaylist'])
+        ...mapGetters(['getPlaylist', 'getQuery'])
     }
   }
 </script>
