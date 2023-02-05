@@ -4,11 +4,11 @@
    <v-col cols="12">
     <v-row>
       <v-spacer/>
-      <v-btn v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = true">
+      <v-btn v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = clickSavePlaylist()">
         <v-icon right dark> mdi-heart </v-icon>  
         Save
       </v-btn>
-      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="createPlaylist()">
+      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="clickCreateSpotifyPlaylist()">
         <v-icon right dark> mdi-spotify </v-icon>  
         Create playlist
       </v-btn>
@@ -154,12 +154,18 @@ export default {
       return Object.keys(this.response).length > 0
     }, 
 
+    clickSavePlaylist() {
+      this.savePlaylist(this.response)
+      this.saveQuery(this.input)
+      this.$router.push({ name: 'save-playlist' })
+    },
+
     createPlaylist() {
       this.savePlaylist(this.response)
       this.$router.push({ name: 'create-playlist' })
     },
 
-    ...mapActions(['savePlaylist']),
+    ...mapActions(['savePlaylist', 'saveQuery']),
   },
 
   watch: { 

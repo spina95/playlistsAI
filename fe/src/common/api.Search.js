@@ -27,5 +27,9 @@ export const SearchService = {
 
     query(text) {
         return ApiService.query("/playlist/search", {"text": text});
-    }
+    },
+
+    savePlaylist(data) {
+      return ApiService.post("/playlist/playlists/", data);
+  },
 };
