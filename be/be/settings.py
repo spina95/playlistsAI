@@ -36,8 +36,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 ALLOWED_HOSTS=[
     '*',
 ]
-
 # Application definition
+
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,7 +52,18 @@ INSTALLED_APPS = [
     'django',
     'corsheaders',        
     'rest_framework',
-    'playlistAI'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'django_filters',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration',
+    'allauth.socialaccount.providers.google',
+    'playlistAI',
+    'spotify',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +131,53 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+SITE_ID = 7
+# Here we tell allauth to use our adapter from above
+ACCOUNT_ADAPTER = 'users.adapter.AccountAPIAdapter'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+# This doesn't seem to work reliable in combination with rest_auth
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+
+
+# Rest auth settings
+
+OLD_PASSWORD_FIELD_ENABLED = True
+
+LOGOUT_ON_PASSWORD_CHANGE = False
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

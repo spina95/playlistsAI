@@ -19,7 +19,7 @@ export default {
         ...mapActions(['login', 'logout'])
     },
     computed: {
-        ...mapGetters(['isLoggedIn', 'getUser'])
+        ...mapGetters(['isSpotifyLoggedIn', 'getSpotifyUser'])
     }
 
 }

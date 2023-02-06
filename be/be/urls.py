@@ -20,4 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('playlist/', include('playlistAI.urls')),
     path('spotify/', include('spotify.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('auth/', include('users.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')), 
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 ]

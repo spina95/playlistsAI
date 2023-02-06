@@ -128,15 +128,24 @@
     methods: {
       createPlaylist() {
         SpotifyService.createPlaylist(this.title, this.description, this.playlist)
+        .then(() => {
+          this.$router.push({ name: 'home' })
+        })
+      },
+
+      async loadPlaylist() {
+        const data = this.getPlaylist
+        const result = await SpotifyService.getSpotifyTracks(data)
+        this.playlist = result.data.data
       }
     },
 
-    mounted () {
-      this.playlist = this.getPlaylist
+    created () {
+      this.loadPlaylist()
     },
 
     computed: {
-        ...mapGetters(['getPlaylist'])
+        ...mapGetters(['getPlaylist',])
     }
   }
 </script>
