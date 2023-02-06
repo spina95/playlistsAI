@@ -20,8 +20,8 @@ const ApiService = {
     });
   },
 
-  get(resource, slug = "") {
-    return axios.get(`${resource}/${slug}`).catch(error => {
+  get(resource) {
+    return axios.get(`${resource}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },

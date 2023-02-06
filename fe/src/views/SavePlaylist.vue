@@ -124,7 +124,7 @@
           'tracks': tracks,
           'title': this.title,
           'query': this.getQuery,
-          'user': 1
+          'user': this.getAuthUserId
         }
         SearchService.savePlaylist(data)
         this.$router.push({ name: 'home' })
@@ -136,7 +136,7 @@
     },
 
     computed: {
-        ...mapGetters(['getPlaylist', 'getQuery'])
+        ...mapGetters(['getPlaylist', 'getQuery', 'getAuthUserId'])
     }
   }
 </script>

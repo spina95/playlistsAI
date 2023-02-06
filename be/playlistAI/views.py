@@ -9,12 +9,12 @@ import openai
 import re
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import django_filters
 from rest_framework import status, viewsets
 from playlistAI.models import Menu, Playlist, Track
 from playlistAI.serializers import MenuSerializer, TrackSerializer, PlaylistSerializer
 
 class SearchView(APIView):  
-    serializer_class = MenuSerializer
 
     def get(self, request, format=None):
         text = self.request.query_params.get("text", None)
@@ -23,7 +23,7 @@ class SearchView(APIView):
         data = r["choices"][0]["text"]
         data = data.strip()
         split = re.split('[0-9]\.', data)
-        out = {}
+        out = []
 
         sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="3568d9f9b3544af98e31131a9fcb02dd",
                                                                 client_secret="1a4d1e3af6274dfa89fab72604a65f86"))
@@ -40,8 +40,8 @@ class SearchView(APIView):
                 spotify_uri = track['uri']
                 preview_url = track['preview_url']
                 artists = ', '.join([x['name'] for x in track['artists']])
-                out[i] = {
-                    "id": id,
+                out.append({
+                    "spotify_id": id,
                     "title": title,
                     "artists": artists,
                     "text": x,
@@ -49,13 +49,16 @@ class SearchView(APIView):
                     "spotify_uri": spotify_uri,
                     "preview_url": preview_url,
                     "export": True
-                }
+                })
                 
         return Response({"status": "success", "data": out, "response": data}, status=status.HTTP_200_OK)
 
 class PlaylistView(viewsets.ModelViewSet):  
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_fields = ["user"]
+        
 
 class TrackView(viewsets.ModelViewSet):  
     queryset = Track.objects.all()

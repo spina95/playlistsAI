@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LoginSpotify from "../views/LoginSpotify"
+import LoginSpotify from '../views/LoginSpotify.vue'
 import CreatePlaylist from "../views/CreatePlaylist"
 import SavePlaylist from "../views/SavePlaylist"
-import LoginView from "../views/LoginView"
+import LoginView from "../views/LoginView.vue"
+import UserPlaylists from "../views/UserPlaylists"
 
 const routes = [
   {
@@ -32,6 +33,12 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView,
+    props: true
+  },
+  {
+    path: '/playlists',
+    name: 'playlists',
+    component: UserPlaylists,
     props: true
   },
   {

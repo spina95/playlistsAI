@@ -6,8 +6,7 @@
         </h1>
       </router-link>
       <v-spacer></v-spacer>
-      <v-btn v-if="!isSpotifyLoggedIn" v-on:click="spotifyLogin" class="export-button icon-button">
-        <v-icon right dark > mdi-spotify </v-icon>  
+      <v-btn v-if="!isSpotifyLoggedIn" prepend-icon="mdi-spotify" v-on:click="spotifyLogin" class="export-button icon-button">
         Connect
       </v-btn>
 
@@ -16,9 +15,9 @@
           <v-btn
             v-bind="props"
             class="export-button icon-button"
+            prepend-icon="mdi-spotify"
           >
-          <v-icon right dark > mdi-spotify </v-icon>  
-            {{ getSpotifyUser }}
+            {{ this.user.username }}
           </v-btn>
         </template>
         <v-list>
@@ -43,6 +42,11 @@
         </template>
         <v-list>
           <v-list-item>
+            <v-list-item-title>
+              <v-btn v-on:click="nvaigateToPlaylists">
+                Playlists
+              </v-btn>
+            </v-list-item-title>
             <v-list-item-title>
               <v-btn v-on:click="authLogout">
                 Disconnect
@@ -69,7 +73,7 @@
     
     },
     data: () => ({
-
+      user: null
     }),
     methods: {
       ...mapActions(['spotifyLogin', 'spotifyLogout', 'continueAuth', 'authLogout']),
@@ -78,7 +82,17 @@
         this.$router.push({ name: 'login' })
       },
 
+      nvaigateToPlaylists() {
+        this.$router.push({ name: 'playlists' })
+      },
+
     },
+
+    mounted() {
+      this.user = this.getAuthUser
+      console.log(this.user)
+    },
+
     computed: {
         ...mapGetters(['isSpotifyLoggedIn', 'getSpotifyUser', 'getAuthUser', 'isAuthLoggedIn'])
     }

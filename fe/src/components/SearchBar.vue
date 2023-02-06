@@ -4,12 +4,10 @@
    <v-col cols="12">
     <v-row>
       <v-spacer/>
-      <v-btn v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = clickSavePlaylist()">
-        <v-icon right dark> mdi-heart </v-icon>  
+      <v-btn prepend-icon="mdi-heart" v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = clickSavePlaylist()">
         Save
       </v-btn>
-      <v-btn v-if="!loading && check_empty_response()" class="export-button icon-button " @click="clickCreateSpotifyPlaylist()">
-        <v-icon right dark> mdi-spotify </v-icon>  
+      <v-btn prepend-icon="mdi-spotify" v-if="!loading && check_empty_response()" class="export-button icon-button " @click="clickCreateSpotifyPlaylist()">
         Create playlist
       </v-btn>
     </v-row>
@@ -103,9 +101,9 @@ export default {
         loading: false,
         input: ref(""), 
         dialog: false,
-        response: {
-          "1": { 
-            "id": "45SB7rSKnJ5sZgjA2vfD4H", 
+        response: [
+          { 
+            "spotify_id": "45SB7rSKnJ5sZgjA2vfD4H", 
             "title": "Jurassic Park (Isla Nublar-1993)", 
             "artists": "Hell On Mask, Tahnee Rodriguez", 
             "text": " Jurassic Park (1993)\n", 
@@ -114,8 +112,8 @@ export default {
             "preview_url": "https://p.scdn.co/mp3-preview/21e9f5f58591f1207276ae2aa544641e6fe23e1d?cid=3568d9f9b3544af98e31131a9fcb02dd",
             "export": true
           }, 
-          "2": { 
-            "id": "2iuLtqeg5NN6MyYB6pRqlk", 
+          { 
+            "spotify_id": "2iuLtqeg5NN6MyYB6pRqlk", 
             "title": "Mr. Jaws - 1975", 
             "artists": "Dickie Goodman", 
             "text": " Jaws (1975)\n", 
@@ -124,8 +122,8 @@ export default {
             "preview_url": "https://p.scdn.co/mp3-preview/096c5bb9b108fa3c30581526933ca662a27abb9c?cid=3568d9f9b3544af98e31131a9fcb02dd", 
             "export": true
           }, 
-            "3": { 
-              "id": "2AXPdHyeJFqEh8OyR2JImr", 
+          { 
+              "spotify_id": "2AXPdHyeJFqEh8OyR2JImr", 
               "title": "The Visitors / Bye / End Titles: The Special Edition", 
               "artists": "John Williams", 
               "text": " Close Encounters of the Third Kind (1977)\n", 
@@ -134,7 +132,7 @@ export default {
               "preview_url": "https://p.scdn.co/mp3-preview/1a4762006b2c5095be6473ec36da32b415c97c0e?cid=3568d9f9b3544af98e31131a9fcb02dd", 
               "export": true
             }
-        }
+        ]
     }
   },
   methods: {
@@ -160,9 +158,9 @@ export default {
       this.$router.push({ name: 'save-playlist' })
     },
 
-    createPlaylist() {
+    clickCreateSpotifyPlaylist() {
       this.savePlaylist(this.response)
-      this.$router.push({ name: 'create-playlist' })
+      this.$router.push({ name: 'create-spotify-playlist' })
     },
 
     ...mapActions(['savePlaylist', 'saveQuery']),
