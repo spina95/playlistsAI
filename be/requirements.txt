@@ -1,5 +1,5 @@
 django
-djangorestframework
+djangorestframework==3.11.0
 mysqlclient
 django-cors-headers
 django-environ

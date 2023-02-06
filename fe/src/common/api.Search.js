@@ -2,7 +2,19 @@ import ApiService from "./api.service";
 
 export const SearchService = {
     login(email, password) {
-      return ApiService.post("/auth/auth/login/", {"email": email, "password": password});
+      return ApiService.post("/dj-rest-auth/login/", {"email": email, "password": password});
+    },
+
+    loginGoogle(code, state) {
+      return ApiService.post("/auth/api/auth/social/google/login/", {"code": code, "state": state});
+    },
+
+    logout() {
+      return ApiService.post("/dj-rest-auth/logout/");
+    },
+
+    getUserInfo() {
+      return ApiService.get("/dj-rest-auth/user");
     },
 
     logout() {
@@ -23,5 +35,17 @@ export const SearchService = {
 
     query(text) {
         return ApiService.query("/playlist/search", {"text": text});
-    }
+    },
+
+    savePlaylist(data) {
+      return ApiService.post("/playlist/playlists/", data);
+    },
+
+    getUserPlaylist(user) {
+      return ApiService.get('/playlist/playlists?user=' + user);
+    },
+
+    deleteUserPlaylist(id) {
+      return ApiService.delete('/playlist/playlists/' + id);
+    },
 };

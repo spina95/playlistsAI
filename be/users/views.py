@@ -16,21 +16,11 @@ from .serializers import CallbackSerializer
 class CallbackMixin:
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = "https://localhost:8080/login"
     # This is our serializer from above
     # You can omit this if you handle CSRF protection in the frontend
-    serializer_class = CallbackSerializer
-
     # Not the prettiest but single source of truth
-    @property
-    def callback_url(self):
-        url = self.adapter_class(self.request).get_callback_url(
-            self.request,
-            None,
-        )
-        print("ciasodasdsa")
-        print(url)
-        return url
-
+    serializer_class = CallbackSerializer
 
 class CallbackCreate(CallbackMixin, SocialLoginView):
     """
@@ -69,6 +59,7 @@ class Login(APIView):
         view.request = request
         view.adapter = adapter
         client = view.get_client(request, app)
+        client.callback_url = "https://localhost:8080/auth/auth/social/google/callback"
         # You can modify `action` if you have more steps in your auth flow
         action = AuthAction.AUTHENTICATE
         auth_params = provider.get_auth_params(request, action)
