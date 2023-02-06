@@ -1,55 +1,81 @@
-import api from '@/auth/SpotifyAuthService'
-import router  from '@/router/index'
+import router  from '@/router/index';
+import JwtService from '@/common/jwt.service';
+import { SearchService } from '@/common/api.Search';
+import ApiService from '@/common/api.service';
+import googleAPI from '@/auth/googleAuthService'
 
 const state = {
-  token: window.localStorage.getItem('token'),
-  user: window.localStorage.getItem('user'),
-  playlist: window.localStorage.getItem('playlist'),
+  authToken: window.localStorage.getItem('authToken'),
+  authUser: window.localStorage.getItem('authUser'),
+  authUserId: window.localStorage.getItem('authUserId'),
 }
 
 const getters = {
-  isLoggedIn: state => !!state.token,
-  getUser: state => state.user,
-  getSpotifyToken: state => state.token
+  isAuthLoggedIn: state => !!state.authToken,
+  getAuthUser: state => state.authUser,
+  getAuthUserId: state => state.authUserId,
+  getAuthToken: state => state.authToken,
 }
 
 const actions = {
-  login: () => { 
-    api.login()
+
+  googleLogin: () => { 
+    googleAPI.login()
   },
 
-  continueOAuth: async ({ commit }, location) => {
-    //const code = location  //.href.match("/(?:code)\=([\S]*?)\&/")[1];
+  continueAuth: async ({ commit }, token) => {
+    commit('setAuthToken', token)
+    window.localStorage.setItem('authToken', token);
+    JwtService.saveToken(token)
+    ApiService.setHeader(token)
+
+    const user = await SearchService.getUserInfo()
+    commit('setAuthUser', user.data.username)
+    window.localStorage.setItem('authUser', user.data.username)
+
+    commit('setAuthUserId', user.data.pk)
+    window.localStorage.setItem('authUserId', user.data.pk)
+
+
+    router.push('/');
+  },
+
+  continueGoogleOAuth: async ({ commit }, location) => {
     const queryString = location.search;
     const urlParams = new URLSearchParams(queryString);
     const code = urlParams.get('code')
+    const state = urlParams.get('state')
 
-    const res = await api.requestToken(code)
+    const res = await SearchService.loginGoogle(code, state)
     const token = res.data.access_token
-    commit('setToken', token)
-    window.localStorage.setItem('token', token)
-
-    const user = await api.getUserInfo(token)
-    commit('setUser', user.data.display_name)
-    window.localStorage.setItem('user', user.data.display_name)
+    commit('setSpotifyToken', token)
+    window.localStorage.setItem('spotifyToken', token)
 
     router.push('/')
   },
 
-  logout: ({ commit }) => {
-    commit('setToken', null)
-    commit('setUser', null)
-    window.localStorage.removeItem('token')
-    window.localStorage.removeItem('user')
+  authLogout: async ({ commit }) => {
+    await SearchService.logout()
+    commit('setAuthToken', null)
+    commit('setAuthUser', null)
+    commit('setAuthUserId', null)
+    window.localStorage.removeItem('authToken')
+    window.localStorage.removeItem('authUser')
+    window.localStorage.removeItem('authUserId')
+    ApiService.setHeader(null)
+
   }
 }
 
 const mutations = {
-  setToken: (state, token) => {
-    state.token = token
+  setAuthToken: (state, token) => {
+    state.authToken = token
   },
-  setUser: (state, user) => {
-    state.user = user
+  setAuthUser: (state, user) => {
+    state.authUser = user
+  },
+  setAuthUserId: (state, id) => {
+    state.authUserId = id
   }
 } 
 

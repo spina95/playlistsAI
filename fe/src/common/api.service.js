@@ -1,5 +1,4 @@
 import axios from 'axios';
-import JwtService from "@/common/jwt.service";
 
 const ApiService = {
   init() {
@@ -9,10 +8,10 @@ const ApiService = {
     }
   },
 
-  setHeader() {
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+  setHeader(token) {
+    axios.defaults.headers = {
+      'Authorization': `Token ${token}`
+    }
   },
 
   query(resource, params) {
@@ -21,8 +20,8 @@ const ApiService = {
     });
   },
 
-  get(resource, slug = "") {
-    return axios.get(`${resource}/${slug}`).catch(error => {
+  get(resource) {
+    return axios.get(`${resource}`).catch(error => {
       throw new Error(`[RWV] ApiService ${error}`);
     });
   },

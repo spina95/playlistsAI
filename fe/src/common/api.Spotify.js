@@ -6,7 +6,7 @@ export const SpotifyService = {
     },
 
     createPlaylist(title, description, tracks) {
-      const token = window.localStorage.getItem('token')
+      const token = window.localStorage.getItem('spotifyToken')
       if (!token) { return }
 
       const data = {
@@ -16,5 +16,9 @@ export const SpotifyService = {
         tracks: tracks
       }
       return ApiService.post("/spotify/playlist", data);
-    }
+    },
+
+    getSpotifyTracks(ids) {
+      return ApiService.post('/spotify/search-tracks', ids);
+    },
 };
