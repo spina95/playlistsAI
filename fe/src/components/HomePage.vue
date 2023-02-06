@@ -52,7 +52,7 @@ export default {
   data: () => ({
     examples: [
       "Suggest me 10 soundtracks from the movies of Steven Spielberg released before 2005",
-      "Suggest me 15 songs from the anime of Naruto or One Piece",
+      "Find 8 rock songs which talk about dogs",
       "Suggest me some chill piano pieces to listen while studying"
     ],
     searchText: ""
