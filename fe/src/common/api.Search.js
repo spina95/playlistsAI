@@ -17,6 +17,14 @@ export const SearchService = {
       return ApiService.get("/dj-rest-auth/user");
     },
 
+    logout() {
+      return ApiService.post("/auth/auth/logout/");
+    },
+
+    getUserInfo() {
+      return ApiService.get("/auth/auth/user");
+    },
+
     getGoogleLogin() {
       return ApiService.post("/auth/api/auth/social/google/auth-server/");
     },

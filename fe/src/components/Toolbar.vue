@@ -16,7 +16,6 @@
             v-bind="props"
             class="export-button icon-button"
             prepend-icon="mdi-spotify"
-          >
             {{ this.user.username }}
           </v-btn>
         </template>
@@ -85,7 +84,6 @@
       nvaigateToPlaylists() {
         this.$router.push({ name: 'playlists' })
       },
-
     },
 
     mounted() {

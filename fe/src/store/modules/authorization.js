@@ -51,7 +51,21 @@ const actions = {
     commit('setSpotifyToken', token)
     window.localStorage.setItem('spotifyToken', token)
 
-    router.push('/')
+  googleLogin: () => { 
+    googleAPI.login()
+  },
+
+  continueAuth: async ({ commit }, token) => {
+    commit('setAuthToken', token)
+    window.localStorage.setItem('authToken', token);
+    JwtService.saveToken(token)
+    ApiService.setHeader(token)
+
+    const user = await SearchService.getUserInfo()
+    commit('setAuthUser', user.data.username)
+    window.localStorage.setItem('authUser', user.data.username)
+
+    router.push('/');
   },
 
   authLogout: async ({ commit }) => {
@@ -76,7 +90,7 @@ const mutations = {
   },
   setAuthUserId: (state, id) => {
     state.authUserId = id
-  }
+  },
 } 
 
 export default {

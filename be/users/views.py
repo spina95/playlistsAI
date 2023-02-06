@@ -19,10 +19,8 @@ class CallbackMixin:
     callback_url = "https://localhost:8080/login"
     # This is our serializer from above
     # You can omit this if you handle CSRF protection in the frontend
-
     # Not the prettiest but single source of truth
-    
-
+    serializer_class = CallbackSerializer
 
 class CallbackCreate(CallbackMixin, SocialLoginView):
     """
