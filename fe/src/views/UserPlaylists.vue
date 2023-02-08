@@ -3,7 +3,7 @@
       <v-col>
         <v-row>
             <v-col cols="12" sm="12" md="6" v-for="(playlist, index) in this.playlists" :key="playlist.title" >
-              <v-card flat class="playlist-card" style="cursor: pointer;  ">
+              <v-card flat class="playlist-card" style="cursor: pointer;" v-on:click="navigateToPlaylist(index)">
                 <v-col>
                   <h4>{{playlist.title}}</h4>
                   <div v-if="playlist.query" style="font-style: italic;">"{{ playlist.query }}"</div>
@@ -87,6 +87,10 @@
         this.savePlaylist(this.playlists[index].tracks)
         this.$router.push({ name: 'create-spotify-playlist' })
       },
+
+      navigateToPlaylist(index) {
+              this.$router.replace({ name: "playlist-detail", params: {id: this.playlists[index].uuid} })
+            },
 
       ...mapActions(['savePlaylist', ]),
 

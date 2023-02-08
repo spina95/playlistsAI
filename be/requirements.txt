@@ -8,3 +8,4 @@ spotipy
 django-allauth
 django-rest-auth
 dj-rest-auth
+django-filter

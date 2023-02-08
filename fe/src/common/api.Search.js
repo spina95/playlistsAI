@@ -37,6 +37,10 @@ export const SearchService = {
       return ApiService.get('/playlist/playlists?user=' + user);
     },
 
+    getUserPlaylistByUUID(uuid) {
+      return ApiService.get('/playlist/playlists?uuid=' + uuid);
+    },
+
     deleteUserPlaylist(id) {
       return ApiService.delete('/playlist/playlists/' + id);
     },

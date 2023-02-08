@@ -1,12 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Menu
-from .models import Menu, Playlist, Track
-
-class MenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Menu
-        fields = '__all__'
+from .models import Playlist, Track
 
 class TrackSerializer(serializers.ModelSerializer):
 

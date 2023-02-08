@@ -1,27 +1,18 @@
 <template>
     <v-container style="width: 70%">
-      <v-col>
-        <v-row>
-            <v-col cols="12" sm="12" md="6" v-for="playlist in this.playlists" :key="playlist.title" >
-              <v-card flat class="playlist-card" style="cursor: pointer;  ">
-                <v-col>
-                  <h4>{{playlist.title}}</h4>
-                  <div v-if="playlist.query" style="font-style: italic;">"{{ playlist.query }}"</div>
-                  <v-row>
-                    <v-btn class="export-button icon-button mt-8">
-                      <v-icon right dark> mdi-spotify </v-icon>  
-                      Export
-                    </v-btn>
-                    <v-spacer/>
-                    <v-btn class="remove-button icon-button mt-8">
-                      <v-icon right dark> mdi-delete </v-icon>  
-                      Remove
-                    </v-btn>
-                  </v-row>
-                </v-col>
-              </v-card>
-            </v-col>
-        </v-row>
+      <v-col style="text-align: center;">
+        <h2>{{ this.playlist.title }}</h2>
+        <div v-if="playlist.query" style="font-style: italic;">"{{ this.playlist.query }}"</div>
+        <div v-for="(track, index) in tracks" :key="track">
+          <TrackCard :track="track" :index="index"/>
+        </div>
+        <v-progress-circular 
+            indeterminate
+            color="primary"
+            size="50"
+            class="ma-5"
+            v-if="loading"
+        ></v-progress-circular>
       </v-col>
     </v-container>
 </template>
@@ -50,29 +41,33 @@
   
 <script>
   import { mapGetters } from 'vuex'
-  import { SpotifyService } from '@/common/api.Spotify';
   import { SearchService } from '@/common/api.Search';
+  import { SpotifyService } from '@/common/api.Spotify';
+  import TrackCard from "@/components/TrackCard.vue"
 
   export default {
     name: 'UserPLaylists',
     props: [],
     components: {
-      
+      TrackCard
     },
   
     data: () => ({
-      playlists: {},
-
+      playlist: {},
+      tracks: null,
+      loading: true
     }),
   
     methods: {
-      createPlaylist() {
-        SpotifyService.createPlaylist(this.title, this.description, this.playlist)
-      },
 
       async loadPlaylist() {
-        data = this.getPlaylist()
-        this.playlists = await SpotifyService.getSpotifyTracks(data)
+        const uuid = this.$route.params.id;
+        const data = await SearchService.getUserPlaylistByUUID(uuid)
+        this.playlist = data.data[0]
+        console.log(this.playlist.tracks)
+        const tracks = await SpotifyService.getSpotifyTracks(this.playlist.tracks)
+        this.tracks = tracks.data.data
+        this.loading = false
       }
     },
 

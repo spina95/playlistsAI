@@ -2,8 +2,6 @@ from django.shortcuts import render
 from rest_framework.views import APIView  
 from rest_framework.response import Response
 from rest_framework import status
-from playlistAI.models import Menu
-from playlistAI.serializers import MenuSerializer
 
 import openai
 import re
@@ -11,8 +9,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import django_filters
 from rest_framework import status, viewsets
-from playlistAI.models import Menu, Playlist, Track
-from playlistAI.serializers import MenuSerializer, TrackSerializer, PlaylistSerializer
+from playlistAI.models import Playlist, Track
+from playlistAI.serializers import TrackSerializer, PlaylistSerializer
 
 class SearchView(APIView):  
 
@@ -57,7 +55,7 @@ class PlaylistView(viewsets.ModelViewSet):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filter_fields = ["user"]
+    filter_fields = ["user", "uuid"]
         
 
 class TrackView(viewsets.ModelViewSet):  

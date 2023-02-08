@@ -21,10 +21,8 @@
             </audio>
           <v-spacer/>
         </v-row>
-        
       </v-col>
-            
-        </div>
+    </div>
 </v-card>
 </template>
   
