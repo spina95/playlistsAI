@@ -1,4 +1,4 @@
-rename: Build and push BE to Google Cloud Platform
+name: Build and push BE to Google Cloud Platform
 on: 
   push:
     branches: [ master ]
