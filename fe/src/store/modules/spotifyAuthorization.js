@@ -8,7 +8,7 @@ const state = {
 }
 
 const getters = {
-  isSpotifyLoggedIn: state => !!state.spotifyToken,
+  isSpotifyLoggedIn: state => state.spotifyToken,
   getSpotifyUser: state => state.spotifyUser,
   getSpotifyToken: state => state.spotifyToken
 }
