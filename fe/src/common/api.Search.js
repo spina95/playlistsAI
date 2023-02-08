@@ -17,14 +17,6 @@ export const SearchService = {
       return ApiService.get("/dj-rest-auth/user");
     },
 
-    logout() {
-      return ApiService.post("/auth/auth/logout/");
-    },
-
-    getUserInfo() {
-      return ApiService.get("/auth/auth/user");
-    },
-
     getGoogleLogin() {
       return ApiService.post("/auth/api/auth/social/google/auth-server/");
     },
@@ -43,6 +35,10 @@ export const SearchService = {
 
     getUserPlaylist(user) {
       return ApiService.get('/playlist/playlists?user=' + user);
+    },
+
+    getUserPlaylistByUUID(uuid) {
+      return ApiService.get('/playlist/playlists?uuid=' + uuid);
     },
 
     deleteUserPlaylist(id) {

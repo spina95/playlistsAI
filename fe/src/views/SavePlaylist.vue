@@ -116,7 +116,7 @@
         let tracks = []
         for (let i in this.playlist) {
 
-          const track = { 'spotify_id': this.playlist[i].id }
+          const track = { 'spotify_id': this.playlist[i].spotify_id }
           tracks.push(track)
         }
 

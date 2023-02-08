@@ -5,6 +5,7 @@ import CreatePlaylist from "../views/CreatePlaylist"
 import SavePlaylist from "../views/SavePlaylist"
 import LoginView from "../views/LoginView.vue"
 import UserPlaylists from "../views/UserPlaylists"
+import UserPlaylistsDetails from "../views/UserPlaylistsDetails"
 
 const routes = [
   {
@@ -46,7 +47,12 @@ const routes = [
     name: 'google-callback',
     component: LoginView,
     props: true
-  }
+  },
+  { 
+    name: 'playlist-detail', 
+    path: '/playlists/:id', 
+    component: UserPlaylistsDetails 
+  },
 ]
 
 const router = createRouter({
