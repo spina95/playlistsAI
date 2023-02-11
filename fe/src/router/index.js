@@ -9,7 +9,13 @@ import UserPlaylistsDetails from "../views/UserPlaylistsDetails"
 
 const routes = [
   {
-    path: '/',
+    path: "/",
+    redirect: "/home",
+    name: "home",
+    component: HomeView,
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView
   },

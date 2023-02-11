@@ -11,11 +11,15 @@
         Create playlist
       </v-btn>
     </v-row>
-    <div style="height: 50px;">
-      <AdSense slotter="7473354236" timeout=200 classNames="ad-noborder"></AdSense>
+    <div>
+      ciao
+      <InArticleAdsense
+        data-ad-client="ca-pub-7124105548936131"
+        data-ad-slot="1320332246">
+      </InArticleAdsense>
     </div>
     
-
+    
     <div v-for="(track, index) in response" :key="track">
       <TrackCard :track="track" :index="index" @event="remove_track" />
     </div>
@@ -86,14 +90,12 @@ import {SearchService} from "../common/api.Search"
 import TrackCard from "./TrackCard.vue"
 import LoginSpotifyDialog from "./LoginSpotifyDialog.vue";
 import { mapActions } from 'vuex'
-import AdSense from "./AdSense.vue";
 
 export default {
   name: 'SearchBar',
   components: {
     TrackCard,
     LoginSpotifyDialog,
-    AdSense
   },
   props: ['searchText'],
   data: function () {
@@ -137,11 +139,7 @@ export default {
   },
   methods: {
     async filteredList() {
-      this.loading = true
-      this.response = {}
-      const data = await SearchService.query(this.input)
-      this.response = data.data.data
-      this.loading = false
+      this.$router.replace({ name: "home", params: {query: this.input} })
     },
 
     remove_track(index) {
@@ -163,19 +161,36 @@ export default {
       this.$router.push({ name: 'create-spotify-playlist' })
     },
 
+    async load() {
+      const query = this.$route.query.query;
+      if (query != null && query.length != 0) {
+        this.loading = true;
+        this.input = query;
+        this.response = {}
+        const data = await SearchService.query(this.input)
+        this.response = data.data.data
+        this.loading = false
+      }
+    },
+
     ...mapActions(['savePlaylist', 'saveQuery']),
   },
 
   watch: { 
-    async searchText() {
-      this.loading = true
-      this.input = this.searchText
-      this.response = {}
-      const data = await SearchService.query(this.searchText)
-      this.response = data.data.data
-      this.loading = false
-    },
 
-}
+    async '$route'() {
+      this.response = {}
+      this.load()
+    },
+    
+    async searchText() {
+      this.$router.replace({ name: "home", query: {query: this.searchTextd} })
+    },
+  },
+
+
+  mounted () {
+    this.load()
+  },
 }
 </script>

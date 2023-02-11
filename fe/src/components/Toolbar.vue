@@ -1,6 +1,6 @@
 <template>
   <v-app-bar elevation="0" app color="background" text>
-    <router-link style="cursor: pointer; text-decoration: none; color: inherit;" to="/">
+    <router-link style="cursor: pointer; text-decoration: none; color: inherit;" to="/home">
       <h1 class="title gradient font-weight-bold pa-5">
         MusicAI
       </h1>
