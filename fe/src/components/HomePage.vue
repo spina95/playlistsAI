@@ -61,7 +61,7 @@ export default {
   methods: {
     search_example(example){
       console.log(example)
-      this.searchText = example
+      this.$router.replace({ name: "home", query: {query: example} })
     }
   }
 }
