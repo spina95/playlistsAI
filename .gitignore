@@ -3,3 +3,4 @@ be/*/__pycache__/*
 be/db.sqlite3
 be/*/migrations/*
 be/.cache
+**/.env
