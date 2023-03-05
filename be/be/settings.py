@@ -14,12 +14,9 @@ from pathlib import Path
 import os
 import environ
 
-# Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+root = environ.Path(__file__) - 3 # three folder back (/a/b/c/ - 3 = /)
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env() # reading .env file
 
 
 # Quick-start development settings - unsuitable for production
@@ -102,15 +99,8 @@ WSGI_APPLICATION = 'be.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'playlistAI'),
-        'USER': os.environ.get('MYSQL_USER', 'test'),
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'test_pass'),
-        'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
-        'PORT': os.environ.get('MYSQL_DATABASE_PORT', 3306),
-    }
+    'default': env.db(), # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
+
 }
 
 # Password validation
@@ -137,14 +127,16 @@ REST_FRAMEWORK = {
     ),
 }
 
-SITE_ID = 7
-# Here we tell allauth to use our adapter from above
+SITE_ID = 8
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 ACCOUNT_ADAPTER = 'users.adapter.AccountAPIAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
 ACCOUNT_EMAIL_REQUIRED = True
 
-# This doesn't seem to work reliable in combination with rest_auth
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
@@ -171,11 +163,8 @@ LOGOUT_ON_PASSWORD_CHANGE = False
 
 
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
 # Internationalization

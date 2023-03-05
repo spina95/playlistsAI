@@ -4,9 +4,15 @@ import re
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-openai.api_key = "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"
-r = openai.Completion.create(model="text-davinci-003", prompt="suggest me 15 songs about horses or dogs", temperature=0, max_tokens=200)
-data = r["choices"][0]["text"]
+openai.api_key = "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"
+r = openai.ChatCompletion.create(
+    model='gpt-3.5-turbo',
+      messages=[
+        {"role": "user", "content": "suggest me 15 songs about horses or dogs"}],
+    max_tokens=193,
+    temperature=0,
+)
+data = r["choices"][0]["message"]['content']
 data = data.strip()
 split = re.split('\d\.', data)
 out = {}

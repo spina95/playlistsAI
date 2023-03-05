@@ -17,8 +17,14 @@ class SearchView(APIView):
     def get(self, request, format=None):
         text = self.request.query_params.get("text", None)
         openai.api_key = "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"
-        r = openai.Completion.create(model="text-davinci-003", prompt=text, temperature=0, max_tokens=4000)
-        data = r["choices"][0]["text"]
+        r = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=[
+                {"role": "user", "content": text}],
+            max_tokens=193,
+            temperature=0,
+        )
+        data = r["choices"][0]["message"]['content']
         data = data.strip()
         split = re.split('[0-9]\.', data)
         out = []

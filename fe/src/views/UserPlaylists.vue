@@ -32,7 +32,7 @@
   text-align: center;
   background-color: rgba(92, 92, 92, 0.247);
   width: 100%;
-  height: auto;
+  height: 150px;
   margin: 20px auto 10px auto;
   color: white;
   vertical-align: middle;
