@@ -30,31 +30,6 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    
-    <v-btn v-if="!isAuthLoggedIn" flat target="_blank">
-      <span class="mr-2" v-on:click="login">Login</span>
-    </v-btn>
-    <v-menu  v-if="isAuthLoggedIn">
-      <template v-slot:activator="{ props }">
-        <v-btn v-bind="props">
-          {{ getAuthUser }}
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item>
-          <v-list-item-title>
-            <v-btn v-on:click="nvaigateToPlaylists">
-              Playlists
-            </v-btn>
-          </v-list-item-title>
-          <v-list-item-title>
-            <v-btn v-on:click="authLogout">
-              Disconnect
-            </v-btn>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
   </v-app-bar>
 </template>
 
