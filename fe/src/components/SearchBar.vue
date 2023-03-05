@@ -4,18 +4,15 @@
    <v-col cols="12">
     <v-row>
       <v-spacer/>
-      <v-btn prepend-icon="mdi-heart" v-if="!loading && check_empty_response()" class="save-button icon-button" @click="dialog = clickSavePlaylist()">
-        Save
-      </v-btn>
       <v-btn prepend-icon="mdi-spotify" v-if="!loading && check_empty_response()" class="export-button icon-button " @click="clickCreateSpotifyPlaylist()">
         Create playlist
       </v-btn>
     </v-row>
     <div>
-      ciao
       <InArticleAdsense
         data-ad-client="ca-pub-7124105548936131"
-        data-ad-slot="1320332246">
+        data-ad-slot="1320332246"
+        style="padding: 30px;">
       </InArticleAdsense>
     </div>
     
@@ -139,7 +136,8 @@ export default {
   },
   methods: {
     async filteredList() {
-      this.$router.replace({ name: "home", params: {query: this.input} })
+      console.log(this.input)
+      this.$router.replace({ name: "home", query: {search: this.input}})
     },
 
     remove_track(index) {
@@ -162,7 +160,8 @@ export default {
     },
 
     async load() {
-      const query = this.$route.query.query;
+      const query = this.$route.query.search;
+      console.log(query)
       if (query != null && query.length != 0) {
         this.loading = true;
         this.input = query;
