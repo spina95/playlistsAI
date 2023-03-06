@@ -1,5 +1,5 @@
 <template>
-<v-container style="width: 70%">
+<v-container>
   <v-col class="d-flex flex-column justify-content-center">
     <v-form v-model="valid" @submit.prevent="login">
       <v-card>

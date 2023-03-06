@@ -1,8 +1,8 @@
 <template>
-  <v-container style="width: 70%">
+  <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <h1 class="title gradient display-2 font-weight-bold">
+        <h1 class="title gradient display-2 font-weight-bold text-h3 text-md-h1">
           MusicAI
         </h1>
         <v-row>
@@ -34,7 +34,6 @@
 
 <style scoped>
   .title {
-    font-size: 12vw;
   }
 
   .example {
@@ -78,7 +77,7 @@ export default {
   methods: {
     search_example(example){
       console.log(example)
-      this.$router.replace({ name: "home", query: {query: example} })
+      this.$router.replace({ name: "home", query: {search: example} })
     }
   }
 }
