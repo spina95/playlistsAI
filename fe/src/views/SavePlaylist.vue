@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 70%">
+    <v-container>
       <v-col>
           <v-col style="text-align: center;">
             <h3>

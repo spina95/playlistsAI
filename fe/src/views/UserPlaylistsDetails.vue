@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 70%">
+    <v-container>
       <v-col style="text-align: center;">
         <h2>{{ this.playlist.title }}</h2>
         <div v-if="playlist.query" style="font-style: italic;">"{{ this.playlist.query }}"</div>
