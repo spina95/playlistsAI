@@ -8,13 +8,7 @@
         Create playlist
       </v-btn>
     </v-row>
-    <div>
-      <InArticleAdsense
-        data-ad-client="ca-pub-7124105548936131"
-        data-ad-slot="1320332246"
-        style="padding: 30px;">
-      </InArticleAdsense>
-    </div>
+  
     
     
     <div v-for="(track, index) in response" :key="track">
