@@ -39,6 +39,15 @@
           </v-col>
         </v-row>
         <v-row align="center" style="height: 50px">
+            <v-btn class="action-button elevation-0">
+              <div v-if="!isPlaying">
+                <v-icon  @click="playSound(track['preview_url'])" size="30" style="color:darkgrey">mdi-play</v-icon>
+              </div>
+              <div v-else>
+                <v-icon  @click="playSound(track['preview_url'])" size="30" style="color:darkgrey">mdi-stop</v-icon>
+              </div>
+            </v-btn>
+            <div> {{ time }} </div>
             <v-spacer/>
             <v-btn :href="track['spotify_uri']" class="action-button elevation-0">
               <v-icon size="30" style="color:darkgrey">mdi-spotify</v-icon>
@@ -50,6 +59,7 @@
       </v-col>
     </v-card>
   </div>
+
 </template>
   
 <style scoped>
@@ -121,28 +131,46 @@
 </style>
 
 <script>
+
 export default {
-    name: 'TrackCard',
-    props: ['track', 'index'],
+    name: "TrackCard",
+    props: ["track", "index"],
     data: () => ({
-        icons: {
-        
-        },
+        icons: {},
+        isPlaying: false,
+        audio: new Audio(),
+        time: 0
     }),
     methods: {
-        remove() {
-            this.$emit('event', this.index)
-        },
-
-        isMobile() {
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            return true
+      remove() {
+          this.$emit("event", this.index);
+      },
+      isMobile() {
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+              return true;
+          }
+          else {
+              return false;
+          }
+      },
+      playSound (sound) {
+        if(sound) {
+          if(this.isPlaying == false){
+            this.audio = new Audio(sound);
+            this.audio.addEventListener("timeupdate", function () {
+              let time = this.currentTime;
+              this.time = time;
+              console.log(time);
+            });
+            this.audio.play();
+            this.isPlaying = true
           } else {
-            return false
-        }
- }
-        
+            this.audio.pause()
+            this.isPlaying = false
+          }
+      }
     }
+    },
 }
 </script>
   
