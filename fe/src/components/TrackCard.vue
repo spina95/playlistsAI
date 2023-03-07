@@ -43,15 +43,12 @@
           </v-col>
         </v-row>
         <v-row align="center" style="height: 50px">
-          <div style="width: 90%;">
+          <div style="width: 80%;">
             <AudioPlayer :src="track['preview_url']"></AudioPlayer>
           </div>
           
           <v-spacer/>
-              <v-icon :href="track['spotify_uri']" size="30" style="color:darkgrey">mdi-spotify</v-icon>
-           
-              
-        
+              <v-icon @click="openSpotify(track['spotify_uri'])" size="30" style="color:darkgrey">mdi-spotify</v-icon> 
           </v-row>
       </v-col>
     </v-card>
@@ -141,6 +138,9 @@ export default {
         time: 1
     }),
     methods: {
+      openSpotify(link) {
+        window.location.href = link
+      },
       remove() {
           this.$emit("event", this.index);
       },
