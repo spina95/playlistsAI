@@ -19,7 +19,8 @@
 </style>
 
 <script>
-    
+import { useDisplay } from 'vuetify'
+
 export default {
     name: 'IconButton',
     props: ['icon', 'text', 'color', 'method'],

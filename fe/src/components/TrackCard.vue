@@ -31,30 +31,27 @@
   <div v-else>
     <v-card width="100%" height="100%" elevation="3" class="item track">
       <v-col>
+        <v-row style="height: 14px;">
+          <v-spacer/>
+          <v-icon @click="remove" size="30" style="color:darkgrey">mdi-minus</v-icon> 
+        </v-row>
         <v-row>
           <img class="cover-mobile" :src="track['cover']"/>
           <v-col style="width: 10%">
-            <div class="track-title text-mobile">{{ track["title"] }}</div>
+            <div class="track-title text-mobile pb-2">{{ track["title"] }}</div>
             <div class="track-subtitle text-mobile">{{ track["artists"] }}</div>
           </v-col>
         </v-row>
         <v-row align="center" style="height: 50px">
-            <v-btn class="action-button elevation-0">
-              <div v-if="!isPlaying">
-                <v-icon  @click="playSound(track['preview_url'])" size="30" style="color:darkgrey">mdi-play</v-icon>
-              </div>
-              <div v-else>
-                <v-icon  @click="playSound(track['preview_url'])" size="30" style="color:darkgrey">mdi-stop</v-icon>
-              </div>
-            </v-btn>
-            <div> {{ time }} </div>
-            <v-spacer/>
-            <v-btn :href="track['spotify_uri']" class="action-button elevation-0">
-              <v-icon size="30" style="color:darkgrey">mdi-spotify</v-icon>
-            </v-btn>
-            <v-btn class="action-button elevation-0">
-              <v-icon @click="remove" size="30" style="color:darkgrey">mdi-minus</v-icon> 
-            </v-btn>
+          <div style="width: 90%;">
+            <AudioPlayer :src="track['preview_url']"></AudioPlayer>
+          </div>
+          
+          <v-spacer/>
+              <v-icon :href="track['spotify_uri']" size="30" style="color:darkgrey">mdi-spotify</v-icon>
+           
+              
+        
           </v-row>
       </v-col>
     </v-card>
@@ -95,8 +92,8 @@
 
 .cover-mobile {
   align-self: center;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   border-radius: 10%;
   margin-right: 10px;
 }
@@ -131,15 +128,17 @@
 </style>
 
 <script>
+import AudioPlayer from './AudioPlayer.vue';
 
 export default {
     name: "TrackCard",
     props: ["track", "index"],
+    components: { AudioPlayer },
     data: () => ({
         icons: {},
         isPlaying: false,
         audio: new Audio(),
-        time: 0
+        time: 1
     }),
     methods: {
       remove() {
@@ -157,7 +156,7 @@ export default {
         if(sound) {
           if(this.isPlaying == false){
             this.audio = new Audio(sound);
-            this.audio.addEventListener("timeupdate", function () {
+            this.audio.addEventListener("timeupdate", () => {
               let time = this.currentTime;
               this.time = time;
               console.log(time);

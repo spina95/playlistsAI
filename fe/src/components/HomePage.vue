@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <h1 class="title gradient display-2 font-weight-bold text-h3 text-md-h1">
+        <h1 class="title gradient display-2 font-weight-bold text-h2 text-sm-h1 pa-8">
           MusicAI
         </h1>
         <v-row>
@@ -18,13 +18,13 @@
         </v-row>
         <div style="height: 50px;"/>
         <div class="d-block d-sm-none">xs</div>
-<div class="d-none d-sm-block d-md-none">sm</div>
-<div class="d-none d-md-block d-lg-none">md</div>
-<div class="d-none d-lg-block d-xl-none">lg</div>
-<div class="d-none d-xl-block">xl</div>
-        <h2>Try some examples:</h2>
+        <div class="d-none d-sm-block d-md-none">sm</div>
+        <div class="d-none d-md-block d-lg-none">md</div>
+        <div class="d-none d-lg-block d-xl-none">lg</div>
+        <div class="d-none d-xl-block">xl</div>
+        <h2 class="font-weight-bold text-h6 text-md-h5">Try some examples:</h2>
         <div v-for="example in examples" :key="example">
-          <h3 class="example" @click="search_example(example)">"{{ example }}"</h3>
+          <h2 class="example text-h6 text-md-h5 pb-2" @click="search_example(example)">"{{ example }}"</h2>
         </div>
         <SearchBar :search-text="searchText"/>
       </v-col>

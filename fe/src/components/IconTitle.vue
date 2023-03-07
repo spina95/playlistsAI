@@ -1,8 +1,8 @@
 <template>
 <v-col class="icon-title">
     <v-row align="center" :justify="justify">
-        <v-icon :size="mdAndDown ? 40 : 60"  class="gradient">{{ icon }}</v-icon>        
-        <h2 class="subtitle gradient font-weight-bold text-h4 text-md-h3">{{ text }}</h2>
+        <v-icon :size="xs ? 40 : 60"  class="gradient">{{ icon }}</v-icon>        
+        <h2 class="subtitle gradient font-weight-bold text-h4 text-sm-h3">{{ text }}</h2>
     </v-row>
 </v-col>
 </template>
@@ -27,8 +27,8 @@ export default {
     
     props: ['icon', 'text', 'justify'],
     setup () {
-    const { xs, mdAndDown } = useDisplay()
-        return { xs, mdAndDown }
+    const { xs, smAndDown } = useDisplay()
+        return { xs, smAndDown }
     },
 }
 </script>

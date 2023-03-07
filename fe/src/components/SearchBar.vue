@@ -21,7 +21,7 @@
         class="ma-5"
         v-if="loading"
     ></v-progress-circular>
-    <h3 v-if="!loading && !check_empty_response()" color="primary">No results were found</h3>
+    <h3 class="pa-8" v-if="!loading && !check_empty_response()" color="primary">No results were found</h3>
   </v-col>
   </v-row>
   <v-dialog v-model="dialog" width="500">
