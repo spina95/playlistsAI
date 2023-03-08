@@ -43,7 +43,7 @@
           </v-col>
         </v-row>
         <v-row align="center" style="height: 50px">
-          <div style="width: 80%;">
+          <div style="width: 90%;">
             <AudioPlayer :src="track['preview_url']"></AudioPlayer>
           </div>
           
