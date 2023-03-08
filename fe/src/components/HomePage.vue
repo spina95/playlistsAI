@@ -28,8 +28,6 @@
 </template>
 
 <style scoped>
-  .title {
-  }
 
   .example {
     cursor: pointer;

@@ -38,8 +38,8 @@
         <v-row>
           <img class="cover-mobile" :src="track['cover']"/>
           <v-col style="width: 10%">
-            <div class="track-title text-mobile pb-2">{{ track["title"] }}</div>
-            <div class="track-subtitle text-mobile">{{ track["artists"] }}</div>
+            <div class="track-title text-mobile text-subtitle-2">{{ track["title"] }}</div>
+            <div class="track-subtitle text-mobile text-subtitle-2">{{ track["artists"] }}</div>
           </v-col>
         </v-row>
         <v-row align="center" style="height: 50px">
@@ -92,7 +92,7 @@
   height: 50px;
   width: 50px;
   border-radius: 10%;
-  margin-right: 10px;
+  margin-right: 2px;
 }
 
 .track-title {
@@ -104,9 +104,6 @@
   text-overflow: ellipsis;
 }
 
-.track-title .mobile {
-  font-size: small;
-}
 
 .track-subtitle {
   color: rgb(138, 138, 138);
@@ -116,11 +113,6 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
-
-.text-mobile {
-  font-size: small;
-}
-
 
 </style>
 
