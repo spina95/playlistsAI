@@ -6,7 +6,35 @@
       </h1>
     </router-link>
     <v-spacer></v-spacer>
-    
+    <v-btn variant="plain" :ripple="false" class="gradient text-subtitle-1 text-md-h5 font-weight-bold" href="/about">
+      About
+    </v-btn>
+    <!--
+    <v-btn v-if="!isSpotifyLoggedIn" prepend-icon="mdi-spotify" v-on:click="spotifyLogin" class="export-button icon-button">
+      Connect
+    </v-btn>
+
+    <v-menu  v-if="isSpotifyLoggedIn">
+      <template v-slot:activator="{ props }">
+        <v-btn
+          v-bind="props"
+          class="export-button icon-button"
+          prepend-icon="mdi-spotify"
+        >
+          {{ getSpotifyUser }}
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title>
+            <v-btn v-on:click="spotifyLogout">
+              Disconnect
+            </v-btn>
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+     -->
   </v-app-bar>
 </template>
 
