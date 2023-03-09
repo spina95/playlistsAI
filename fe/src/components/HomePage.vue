@@ -16,10 +16,10 @@
             <IconTitle icon="mdi-headphones" text="Listen" justify="center" />
           </v-col>         
         </v-row>
-        <div style="height: 50px;"/>
-        <h2 class="font-weight-bold text-subtitle-1 text-md-h5">Try some examples:</h2>
+        <div style="height: 40px;"/>
+        <h2 class="font-weight-bold text-subtitle-1 text-md-h6 pt-10" style="color: darkgray;">Try some examples:</h2>
         <div v-for="example in examples" :key="example">
-          <h2 class="example text-subtitle-1 text-md-h5 pb-2" @click="search_example(example)">"{{ example }}"</h2>
+          <h2 class="example text-subtitle-1 text-md-h6 pb-2" @click="search_example(example)">"{{ example }}"</h2>
         </div>
         <SearchBar :search-text="searchText"/>
       </v-col>
