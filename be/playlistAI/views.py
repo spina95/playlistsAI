@@ -42,7 +42,7 @@ class SearchView(APIView):
             author = x['artist']
             search_text = title + ' ' + author
             result = sp.search(q='track:' + search_text, type='track', limit=1)
-            if result:
+            if result and len(result['tracks']['items']) > 0:
                 track = result['tracks']['items'][0]
                 id = track['id']
                 cover = track['album']['images'][0]['url']
