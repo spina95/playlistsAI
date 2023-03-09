@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 openai.api_key = "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"
 
 premessage = "answer this question in a json dictionary with title and artist: \n## "
-message = "Suggest me 10 soundtracks from the movies of Steven Spielberg released before 2005"
+message = "Find the songs that have won an Oscar in the last 10 years"
 r = openai.ChatCompletion.create(
     model='gpt-3.5-turbo',
       messages=[
@@ -33,7 +33,7 @@ for i, x in enumerate(json_data[found_field]):
     author = x['artist']
     search_text = title + ' ' + author
     result = sp.search(q='track:' + search_text, type='track', limit=1)
-    if result:
+    if result and len(result['tracks']['items']) > 0:
         track = result['tracks']['items'][0]
         id = track['id']
         cover = track['album']['images'][0]['url']
