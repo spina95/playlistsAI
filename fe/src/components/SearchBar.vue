@@ -1,5 +1,5 @@
 <template>
-   <input type="text" v-model="this.input"  v-on:keyup.enter="filteredList" placeholder="Search songs..." class="text-field-style search-text-field" />
+   <input type="text" v-model="this.input"  v-on:keyup.enter="filteredList" placeholder="Search" class="text-field-style search-text-field" />
    <v-row dense>
    <v-col cols="12">
     <v-row>
@@ -19,7 +19,7 @@
         class="ma-5"
         v-if="loading"
     ></v-progress-circular>
-    <h3 class="pa-8" v-if="!loading && !check_empty_response()" color="primary">No results were found</h3>
+    <h3 class="pa-8" v-if="!loading && !check_empty_response() && searchText" color="primary">No results were found</h3>
   </v-col>
   </v-row>
   <v-dialog v-model="dialog" width="500">
@@ -93,36 +93,7 @@ export default {
         input: ref(""), 
         dialog: false,
         response: [
-          { 
-            "spotify_id": "45SB7rSKnJ5sZgjA2vfD4H", 
-            "title": "Jurassic Park (Isla Nublar-1993)", 
-            "artists": "Hell On Mask, Tahnee Rodriguez", 
-            "text": " Jurassic Park (1993)\n", 
-            "cover": "https://i.scdn.co/image/ab67616d0000b27335d7dd872f8cd11d465cdeb7", 
-            "spotify_uri": "spotify:track:45SB7rSKnJ5sZgjA2vfD4H", 
-            "preview_url": "https://p.scdn.co/mp3-preview/21e9f5f58591f1207276ae2aa544641e6fe23e1d?cid=3568d9f9b3544af98e31131a9fcb02dd",
-            "export": true
-          }, 
-          { 
-            "spotify_id": "2iuLtqeg5NN6MyYB6pRqlk", 
-            "title": "Mr. Jaws - 1975", 
-            "artists": "Dickie Goodman", 
-            "text": " Jaws (1975)\n", 
-            "cover": "https://i.scdn.co/image/ab67616d0000b273250164ecb9c19576950b5e8e", 
-            "spotify_uri": "spotify:track:2iuLtqeg5NN6MyYB6pRqlk", 
-            "preview_url": "https://p.scdn.co/mp3-preview/096c5bb9b108fa3c30581526933ca662a27abb9c?cid=3568d9f9b3544af98e31131a9fcb02dd", 
-            "export": true
-          }, 
-          { 
-              "spotify_id": "2AXPdHyeJFqEh8OyR2JImr", 
-              "title": "The Visitors / Bye / End Titles: The Special Edition", 
-              "artists": "John Williams", 
-              "text": " Close Encounters of the Third Kind (1977)\n", 
-              "cover": "https://i.scdn.co/image/ab67616d0000b273416f172c9112212a39b511ed", 
-              "spotify_uri": "spotify:track:2AXPdHyeJFqEh8OyR2JImr", 
-              "preview_url": "https://p.scdn.co/mp3-preview/1a4762006b2c5095be6473ec36da32b415c97c0e?cid=3568d9f9b3544af98e31131a9fcb02dd", 
-              "export": true
-            }
+          
         ]
     }
   },
@@ -153,6 +124,7 @@ export default {
 
     async load() {
       const query = this.$route.query.search;
+      this.input = query;
       console.log(query)
       if (query != null && query.length != 0) {
         this.loading = true;
