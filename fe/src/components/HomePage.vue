@@ -62,7 +62,7 @@ export default {
     examples: [
       "Suggest me 10 soundtracks from the movies of Steven Spielberg released before 2005",
       "Find the songs that have won an Oscar in the last 10 years",
-      "Suggest me some chill piano pieces to listen while studying"
+      "Find 10 songs of british singers released last year"
     ],
     searchText: ""
   }),
