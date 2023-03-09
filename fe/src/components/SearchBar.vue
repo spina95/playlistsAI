@@ -4,7 +4,11 @@
    <v-col cols="12">
     <v-row>
       <v-spacer/>
-      
+      <!--
+      <v-btn prepend-icon="mdi-spotify" v-if="!loading && check_empty_response()" class="export-button icon-button " @click="clickCreateSpotifyPlaylist()">
+        Create playlist
+      </v-btn>
+      -->
     </v-row>
   
     

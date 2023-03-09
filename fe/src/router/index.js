@@ -6,6 +6,7 @@ import SavePlaylist from "../views/SavePlaylist"
 import LoginView from "../views/LoginView.vue"
 import UserPlaylists from "../views/UserPlaylists"
 import UserPlaylistsDetails from "../views/UserPlaylistsDetails"
+import About from "../views/About"
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
   },
   {
     path: '/api/sessions/oauth/spotify',

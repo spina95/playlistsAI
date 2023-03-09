@@ -6,10 +6,10 @@
         <v-col align-self="start" style="width: 50px;">
           <v-row align="center" style="height: 50px">
             <v-spacer/>
-            <v-btn :href="track['spotify_uri']" class="action-button elevation-0">
+            <v-btn variant="plain" :ripple="false" :href="track['spotify_uri']" class="action-button elevation-0">
               <v-icon size="30" style="color:darkgrey">mdi-spotify</v-icon>
             </v-btn>
-            <v-btn class="action-button elevation-0">
+            <v-btn variant="plain" :ripple="false" class="action-button elevation-0">
               <v-icon @click="remove" size="30" style="color:darkgrey">mdi-minus</v-icon> 
             </v-btn>
           </v-row>
