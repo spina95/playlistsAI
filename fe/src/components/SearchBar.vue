@@ -11,9 +11,7 @@
       -->
     </v-row>
   
-    <!-- Ezoic - under_page_title - under_page_title -->
-    <div id="ezoic-pub-ad-placeholder-102"> </div>
-    <!-- End Ezoic - under_page_title - under_page_title -->
+    
     
     <div v-for="(track, index) in response" :key="track">
       <TrackCard :track="track" :index="index" @event="remove_track" />
