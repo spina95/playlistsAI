@@ -67,7 +67,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  base: '/home',
+  base: '/',
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
