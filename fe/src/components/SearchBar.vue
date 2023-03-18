@@ -10,8 +10,17 @@
       </v-btn>
       -->
     </v-row>
+<<<<<<< Updated upstream
   
     
+=======
+
+    <!-- Ezoic - under_page_title - under_page_title -->
+    <div id="ezoic-pub-ad-placeholder-103" style="width: 100%; height: 50px;"> </div>
+    <!-- End Ezoic - under_page_title - under_page_title -->
+
+    <h3 class="pa-8" v-if="error" color="primary">An error has occured, please try again</h3>
+>>>>>>> Stashed changes
     
     <div v-for="(track, index) in response" :key="track">
       <TrackCard :track="track" :index="index" @event="remove_track" />
@@ -98,7 +107,8 @@ export default {
         dialog: false,
         response: [
           
-        ]
+        ],
+        error: null
     }
   },
   methods: {
@@ -129,14 +139,22 @@ export default {
     async load() {
       const query = this.$route.query.search;
       this.input = query;
+      this.error = null
       console.log(query)
       if (query != null && query.length != 0) {
         this.loading = true;
         this.input = query;
         this.response = {}
-        const data = await SearchService.query(this.input)
-        this.response = data.data.data
-        this.loading = false
+        try {
+          const data = await SearchService.query(this.input)
+          this.response = data.data.data
+          this.error = null
+          this.loading = false
+        } catch(err) {
+          this.error = err
+          this.loading = false
+        }
+        
       }
     },
 
