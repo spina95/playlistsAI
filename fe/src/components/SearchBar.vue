@@ -10,6 +10,10 @@
       </v-btn>
       -->
     </v-row>
+
+    <!-- Ezoic - under_page_title - under_page_title -->
+    <div id="ezoic-pub-ad-placeholder-103" style="width: 100%; height: 50px;"> </div>
+    <!-- End Ezoic - under_page_title - under_page_title -->
   
     
     
