@@ -135,6 +135,7 @@ export default {
       const query = this.$route.query.search;
       this.input = query;
       this.error = null
+      this.loading = false;
       console.log(query)
       if (query != null && query.length != 0) {
         this.loading = true;
@@ -142,9 +143,12 @@ export default {
         this.response = {}
         try {
           const data = await SearchService.query(this.input)
-          this.response = data.data.data
-          this.error = null
-          this.loading = false
+          if (query == this.$route.query.search) {
+            this.response = data.data.data
+            this.error = null
+            this.loading = false
+          }
+          
         } catch(err) {
           this.error = err
           this.loading = false
@@ -167,6 +171,7 @@ export default {
       this.$router.replace({ name: "home", query: {query: this.searchTextd} })
     },
   },
+  
 
   mounted () {
     this.load()
