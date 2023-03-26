@@ -18,5 +18,12 @@ export default {
   data: () => ({
     //
   }),
+
+  mounted() {
+      let fontAwesome = document.createElement('script')
+      fontAwesome.setAttribute('src', 'https://go.ezoic.net/ezoic/ezoic.js')
+      document.head.appendChild(fontAwesome)
+    },
 }
+
 </script>
