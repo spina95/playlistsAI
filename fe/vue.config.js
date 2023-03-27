@@ -8,6 +8,5 @@ module.exports = defineConfig({
   },
   publicPath:"/",
   outputDir:"dist",
-  baseUrl:'./',
   assetsDir:'./'
 })
