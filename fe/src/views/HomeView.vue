@@ -17,7 +17,8 @@ export default defineComponent({
 
   mounted() {
       let fontAwesome = document.createElement('script')
-      //fontAwesome.setAttribute('src', '//go.ezoic.net/ezoic/ezoic.js')
+      fontAwesome.setAttribute('var ezoicId', '444400')
+      fontAwesome.setAttribute('src', '//go.ezoic.net/ezoic/ezoic.js')
       document.head.appendChild(fontAwesome)
     },
 });
