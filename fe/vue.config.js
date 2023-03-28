@@ -6,5 +6,7 @@ module.exports = defineConfig({
 			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
 		}
   },
-  publicPath: ''
+  publicPath: process.env.BASE_URL,
+    
+  assetsDir: process.env.BASE_URL
 })
