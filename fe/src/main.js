@@ -8,7 +8,6 @@ import { store } from './store'
 import '@/assets/global.css';
 import vue3GoogleLogin from 'vue3-google-login'
 import ScriptX from 'vue-scriptx'
-import VueMeta from 'vue-meta'
 
 loadFonts()
 ApiService.init();
@@ -22,17 +21,5 @@ createApp(App)
   .use(vue3GoogleLogin, {
     clientId: '220413848347-e6u5a418eilqgddq0fd4gl4kcd80clc1.apps.googleusercontent.com',
     scope: 'openid https://www.googleapis.com/auth/gmail.send'
-  })
-  .use(VueMeta, {
-    // optional pluginOptions
-    metaInfo: {
-      script: [
-        {
-          async: true,
-          src: '//go.ezoic.net/ezoic/ezoic.js',
-          ezoicId: "444400"
-        }
-      ],
-    }
   })
   .mount('#app')
