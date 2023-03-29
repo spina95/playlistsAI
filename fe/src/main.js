@@ -12,6 +12,13 @@ import ScriptX from 'vue-scriptx'
 loadFonts()
 ApiService.init();
 
+head.script.push({
+  async: true,
+  src: '//go.ezoic.net/ezoic/ezoic.js',
+  ezoicId: "444400"
+});
+
+
 createApp(App)
   .use(router)
   .use(vuetify)
