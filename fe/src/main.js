@@ -23,5 +23,9 @@ createApp(App)
     clientId: '220413848347-e6u5a418eilqgddq0fd4gl4kcd80clc1.apps.googleusercontent.com',
     scope: 'openid https://www.googleapis.com/auth/gmail.send'
   })
-  .use(VueMeta)
+  .use(VueMeta, {
+    // optional pluginOptions
+    
+    
+  })
   .mount('#app')
