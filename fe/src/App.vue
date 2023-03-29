@@ -17,5 +17,10 @@ export default {
   },
   data: () => ({
     //
-  })
+  }),
+  mounted() {
+      
+    },
+}
+
 </script>
