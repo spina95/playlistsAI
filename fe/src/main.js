@@ -25,7 +25,14 @@ createApp(App)
   })
   .use(VueMeta, {
     // optional pluginOptions
-    
-    
+    metaInfo: {
+      script: [
+        {
+          async: true,
+          src: '//go.ezoic.net/ezoic/ezoic.js',
+          ezoicId: "444400"
+        }
+      ],
+    }
   })
   .mount('#app')
