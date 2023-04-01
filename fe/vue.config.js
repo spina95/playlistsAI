@@ -6,27 +6,7 @@ module.exports = defineConfig({
 			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
 		}
   },
-  publicPath: './',
+  publicPath: process.env.BASE_URL,
     
-  assetsDir: './',
-  configureWebpack:{
-    mode: 'development',
-    devtool: false,
-    optimization: {
-      splitChunks: {
-        
-           
-        chunks: 'all',
-        minSize: 15000,
-        maxSize: 250000,
-        maxAsyncRequests: 30,
-        maxInitialRequests: 30,
-        enforceSizeThreshold: 50000,
-        
-      },
-    
-     
-    },
-
-  }
+  assetsDir: process.env.BASE_URL
 })
