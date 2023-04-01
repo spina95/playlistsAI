@@ -6,9 +6,9 @@ module.exports = defineConfig({
 			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
 		}
   },
-  publicPath: process.env.BASE_URL,
+  publicPath: './',
     
-  assetsDir: process.env.BASE_URL,
+  assetsDir: './',
   configureWebpack:{
     mode: 'development',
     devtool: false,
