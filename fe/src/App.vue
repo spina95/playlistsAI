@@ -9,6 +9,8 @@
 
 <script>
 import Toolbar from './components/Toolbar.vue';
+import postscribe from 'postscribe';
+
 
 export default {
   name: 'App',
@@ -19,7 +21,8 @@ export default {
     //
   }),
   mounted() {
-    /*
+
+      
       const googleSignInScript = document.createElement('script');
       googleSignInScript.setAttribute('ezoicId', '444400')
       googleSignInScript.setAttribute(
@@ -28,8 +31,8 @@ export default {
       );
       googleSignInScript.setAttribute('async', 'true');
       googleSignInScript.setAttribute('defer', 'true');
-      document.head.appendChild(googleSignInScript);
-      */
+      //document.head.appendChild(googleSignInScript);
+      postscribe(document.head, googleSignInScript);
     }
 }
 
