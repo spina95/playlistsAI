@@ -33,14 +33,6 @@ export default {
       */
       
     },
-
-    beforeCreate() {
-      let jqueryScript = document.createElement('script')
-      jqueryScript.setAttribute('ezoicId', '444400')
-      jqueryScript.setAttribute('src', 'http://go.ezoic.net/ezoic/ezoic.js')
-      document.head.appendChild(jqueryScript);
-  
-  },
 }
 
 </script>
