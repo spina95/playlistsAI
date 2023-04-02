@@ -19,6 +19,7 @@ export default {
     //
   }),
   mounted() {
+    /*
       const googleSignInScript = document.createElement('script');
       googleSignInScript.setAttribute('ezoicId', '444400')
       googleSignInScript.setAttribute(
@@ -28,7 +29,8 @@ export default {
       googleSignInScript.setAttribute('async', 'true');
       googleSignInScript.setAttribute('defer', 'true');
       document.head.appendChild(googleSignInScript);
-    },
+      */
+    }
 }
 
 </script>
