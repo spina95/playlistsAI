@@ -11,7 +11,10 @@ import ScriptX from 'vue-scriptx'
 import { createHead } from "@vueuse/head"
 
 const head = createHead({
-  //script: [ { type: 'text/javascript', src: 'http://go.ezoic.net/ezoic/ezoic.js', async: true } ],
+  script: [ 
+    { type: 'application/javascript', src: 'http://go.ezoic.net/ezoic/ezoic.js', async: true, defer: true },
+   ],
+  
 })
 
 loadFonts()
