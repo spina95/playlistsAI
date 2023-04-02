@@ -29,9 +29,9 @@ export default {
         'src',
         'http://go.ezoic.net/ezoic/ezoic.js'
       );
-      googleSignInScript.setAttribute('async', 'true');
-      googleSignInScript.setAttribute('defer', 'true');
       //document.head.appendChild(googleSignInScript);
+      console.log("TEST")
+      console.log(googleSignInScript)
       postscribe(document.head, googleSignInScript);
     }
 }
