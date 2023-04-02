@@ -19,10 +19,11 @@ export default {
     //
   }),
   mounted() {
-      let fontAwesome = document.createElement('script')
-      fontAwesome.setAttribute('ezoicId', '444400')
-      fontAwesome.setAttribute('src', 'http://go.ezoic.net/ezoic/ezoic.js')
-      document.head.appendChild(fontAwesome)
+      let script = document.createElement('script')
+      script.setAttribute('ezoicId', '444400')
+      script.setAttribute('src', 'http://go.ezoic.net/ezoic/ezoic.js')
+      script.async = true
+      document.head.appendChild(script)
     },
 }
 
