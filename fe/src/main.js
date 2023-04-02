@@ -12,7 +12,7 @@ import { createHead } from "@vueuse/head"
 
 const head = createHead({
   script: [ 
-    { type: 'application/javascript', src: 'http://go.ezoic.net/ezoic/ezoic.js', async: true, defer: true },
+    //{ type: 'application/javascript', src: 'http://go.ezoic.net/ezoic/ezoic.js', async: true, defer: true },
    ],
   
 })
