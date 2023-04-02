@@ -19,11 +19,15 @@ export default {
     //
   }),
   mounted() {
-      let script = document.createElement('script')
-      script.setAttribute('ezoicId', '444400')
-      script.setAttribute('src', 'http://go.ezoic.net/ezoic/ezoic.js')
-      script.async = true
-      document.head.appendChild(script)
+      const googleSignInScript = document.createElement('script');
+      googleSignInScript.setAttribute('ezoicId', '444400')
+      googleSignInScript.setAttribute(
+        'src',
+        'http://go.ezoic.net/ezoic/ezoic.js'
+      );
+      googleSignInScript.setAttribute('async', 'true');
+      googleSignInScript.setAttribute('defer', 'true');
+      document.head.appendChild(googleSignInScript);
     },
 }
 
