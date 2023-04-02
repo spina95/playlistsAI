@@ -1,4 +1,5 @@
 <template>
+  <div id="add-script-here" />
   <v-app>
     <Toolbar />
     <v-main>
@@ -9,8 +10,7 @@
 
 <script>
 import Toolbar from './components/Toolbar.vue';
-import postscribe from 'postscribe';
-
+import postscribe from '/src/plugins/postscribe.client'
 
 export default {
   name: 'App',
@@ -20,20 +20,13 @@ export default {
   data: () => ({
     //
   }),
-  mounted() {
+  mounted () {
+    // eslint-disable-next-line no-useless-escape
+    postscribe('#add-script-here', '<script ezoicId=444400 src=http://go.ezoic.net/ezoic/ezoic.js><\/script>')
 
-      
-      const googleSignInScript = document.createElement('script');
-      googleSignInScript.setAttribute('ezoicId', '444400')
-      googleSignInScript.setAttribute(
-        'src',
-        'http://go.ezoic.net/ezoic/ezoic.js'
-      );
-      //document.head.appendChild(googleSignInScript);
-      console.log("TEST")
-      console.log(googleSignInScript)
-      postscribe(document.head, googleSignInScript);
-    }
+    // If you need to do something onload, then instead of the line above do it like this:
+    // this.$postscribe('#add-script-here', '<script onload="DO_SOMETHING_ONLOAD_HEAR" src="SCRIPT_URL"><\/script>')
+  }
 }
 
 </script>
