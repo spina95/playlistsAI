@@ -1,7 +1,7 @@
 <template>
   <v-container>
         <!-- Ezoic - top_of_page - top_of_page -->
-    <div id="ezoic-pub-ad-placeholder-115"> </div>
+    <div id="ezoic-pub-ad-placeholder-115" style="height: 100px;"> </div>
     <!-- End Ezoic - top_of_page - top_of_page -->
     <v-row class="text-center">
       <v-col cols="12">
