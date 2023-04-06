@@ -1,5 +1,8 @@
 <template>
   <v-container>
+        <!-- Ezoic - top_of_page - top_of_page -->
+    <div id="ezoic-pub-ad-placeholder-115"> </div>
+    <!-- End Ezoic - top_of_page - top_of_page -->
     <v-row class="text-center">
       <v-col cols="12">
         <h1 class="title gradient display-2 font-weight-bold text-h2 text-sm-h1 pa-8">
