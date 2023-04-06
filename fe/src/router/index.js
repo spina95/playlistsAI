@@ -11,7 +11,6 @@ import About from "../views/About"
 const routes = [
   {
     path: "/",
-    redirect: "/home",
     component: HomeView,
   },
   {
