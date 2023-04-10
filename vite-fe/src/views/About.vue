@@ -22,7 +22,8 @@
         </v-col>
         <v-col cols="12" sm="10">
           <div style="font-weight: normal; color: darkgray; text-align: center;" class="text-subtitle-1 text-md-h5 gradient">
-            Find your favourite songs or discover new music trying new requests          </div>
+            Find your favourite songs or discover new music trying new requests        
+          </div>
         </v-col>
       </v-row>
       <v-row class="pb-8" style="align-items: center;">
