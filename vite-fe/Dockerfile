@@ -5,7 +5,6 @@ WORKDIR /app
 
 # install app dependencies
 COPY package.json ./
-COPY package-lock.json ./
 
 # Fix permissions for packages
 # RUN npm config set unsafe-perm true
