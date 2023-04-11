@@ -1,11 +1,22 @@
 FROM node:lts-alpine
 
+# set the working direction
 WORKDIR /app
-COPY . ./
-COPY package*.json ./
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+
+# Fix permissions for packages
+# RUN npm config set unsafe-perm true
+
 RUN npm install
-RUN npm run build
+RUN npm install -g serve
 
-EXPOSE 8080
+# Bundle app source
+COPY . ./
 
-CMD [ "npm", "run", "dev" ]
+RUN chown -R node:node /app/node_modules
+
+# start app
+CMD ["npm", "run", "dev"]
