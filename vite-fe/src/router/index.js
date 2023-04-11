@@ -11,7 +11,6 @@ import About from "../views/About"
 const routes = [
   {
     path: "/",
-    name: 'home',
     component: HomeView,
   },
   {
