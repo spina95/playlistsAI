@@ -11,7 +11,7 @@ import About from "../views/About"
 const routes = [
   {
     path: "/",
-    redirect: "/home",
+    name: 'home',
     component: HomeView,
   },
   {
@@ -67,7 +67,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes
 })
 
