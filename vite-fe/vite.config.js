@@ -39,4 +39,5 @@ export default defineConfig({
     port: 8080,
   },
   base: '',
+  publicDir: 'assets'
 })
