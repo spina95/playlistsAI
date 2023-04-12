@@ -8,6 +8,11 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: './',
+  build: {
+      outDir: 'dist',
+  },
+  publicDir: 'assets',
   plugins: [
     vue({ 
       template: { transformAssetUrls }
@@ -38,6 +43,4 @@ export default defineConfig({
   server: {
     port: 8080,
   },
-  base: '',
-  publicDir: 'assets'
 })

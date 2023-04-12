@@ -44,7 +44,7 @@
   height: 70px;
   margin: 20px auto;
   padding: 10px 45px;
-  background: rgb(255, 255, 255) url("/assets/search-icon.svg") no-repeat 15px center;
+  background: rgb(255, 255, 255) url("@/assets/search-icon.svg") no-repeat 15px center;
   background-size: 15px 15px;
   font-size: 16px;
   border: none;
