@@ -11,7 +11,13 @@ import About from "../views/About"
 const routes = [
   {
     path: "/",
+    redirect: "/home",
     component: HomeView,
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: HomeView
   },
   {
     path: '/about',
@@ -61,7 +67,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory("/"),
+  history: createWebHistory(),
   routes
 })
 
