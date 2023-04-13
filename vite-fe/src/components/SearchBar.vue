@@ -10,11 +10,6 @@
       </v-btn>
       -->
     </v-row>
-
-    <!-- Ezoic - under_page_title - under_page_title -->
-    <div id="ezoic-pub-ad-placeholder-103" style="width: 100%; height: 50px;"> </div>
-    
-    <!-- End Ezoic - under_page_title - under_page_title -->
   
     <h3 class="pa-8" v-if="error" color="primary">An error has occured, please try again</h3>
     
