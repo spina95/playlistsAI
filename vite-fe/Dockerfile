@@ -20,4 +20,4 @@ RUN chown -R node:node /app/node_modules
 EXPOSE 8080
 
 # start app
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "preview" ]
