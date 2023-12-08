@@ -1,5 +1,6 @@
 <template>
     <v-container>
+      
       <!--
       <div style="font-weight: normal; color: darkgray;" class="text-subtitle-1 text-md-h5  pl-4">
           MusicAI is a tool, powered by artificial intelligence, that introduces a new way to discover or find music. Taking advantage of the modern ChatGPT, MusicAI 
