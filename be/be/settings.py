@@ -53,14 +53,9 @@ INSTALLED_APPS = [
     'rest_auth',
     'django.contrib.sites',
     'django_filters',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'rest_auth.registration',
-    'allauth.socialaccount.providers.google',
     'playlistAI',
     'spotify',
-    'users',
+    
 ]
 
 MIDDLEWARE = [
@@ -72,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'be.urls'
