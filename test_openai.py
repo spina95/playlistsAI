@@ -5,7 +5,7 @@ import spotipy
 import json
 from spotipy.oauth2 import SpotifyClientCredentials
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 premessage = "answer this question in a json dictionary with title and artist: \n## "
 message = "Find the songs that have won an Oscar in the last 10 years"
