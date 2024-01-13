@@ -17,7 +17,7 @@ class SearchView(APIView):
 
     def get(self, request, format=None):
         message = self.request.query_params.get("text", None)
-        openai.api_key = "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"
+        openai.api_key = "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"
         premessage = "answer this question in a json dictionary with title and artist: \n## "
         r = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',
