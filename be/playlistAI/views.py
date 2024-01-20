@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView  
 from rest_framework.response import Response
 from rest_framework import status
-
+import os
 import openai
 import re
 import spotipy
@@ -17,7 +17,7 @@ class SearchView(APIView):
 
     def get(self, request, format=None):
         message = self.request.query_params.get("text", None)
-        openai.api_key = "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"
+        openai.api_key = os.environ['OPENAI_API_KEY']
         premessage = "answer this question in a json dictionary with title and artist: \n## "
         r = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',
