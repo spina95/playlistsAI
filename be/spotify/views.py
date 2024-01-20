@@ -6,7 +6,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 import spotipy
 import json
-    
+import os
 class UserDetail(APIView):
     """
     Retrieve user data from token
@@ -43,8 +43,8 @@ class SearchTracks(APIView):
     def post(self, request, format=None):
 
         tracks = request.data
-        sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id="3568d9f9b3544af98e31131a9fcb02dd",
-                                                                client_secret="1a4d1e3af6274dfa89fab72604a65f86"))
+        sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=os.environ['SPOTIFY_CLIENT'],
+                                                                client_secret=os.environ['SPOTIFY_SECRET']))
         ids = [x['spotify_id'] for x in tracks]
         results = sp.tracks(ids)
         out = {}
